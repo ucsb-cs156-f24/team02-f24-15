@@ -2,35 +2,35 @@ const menuItemReviewFixtures = {
     oneReview: {
       id: 1,
       itemId: 20,
-      reviewEmail: "cgaucho@ucsb.edu",
+      reviewerEmail: "cgaucho@ucsb.edu",
       stars: 3,
       dateReviewed: "2022-01-02T12:00:00",
-      comments: "okay"
+      comments: "okay",
     },
     threeReviews: [
       {
         id: 2,
         itemId: 24,
-        reviewEmail: "amy@ucsb.edu",
+        reviewerEmail: "amy@ucsb.edu",
         stars: 4,
         dateReviewed: "2022-01-03T12:00:00",
-        comments: "good"
+        comments: "good",
       },
       {
         id: 3,
         itemId: 28,
-        reviewEmail: "chris@ucsb.edu",
+        reviewerEmail: "chris@ucsb.edu",
         stars: 1,
         dateReviewed: "2022-01-04T12:00:00",
-        comments: "terrible"
+        comments: "terrible",
       },
       {
         id: 4,
         itemId: 32,
-        reviewEmail: "john@ucsb.edu",
+        reviewerEmail: "john@ucsb.edu",
         stars: 5,
         dateReviewed: "2022-01-05T12:00:00",
-        comments: "amazing"
+        comments: "amazing",
       },
     ],
   };
