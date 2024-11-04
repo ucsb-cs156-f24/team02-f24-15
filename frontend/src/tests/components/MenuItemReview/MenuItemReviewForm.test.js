@@ -24,7 +24,9 @@ describe("MenuItemReviewForm tests", () => {
   test("renders correctly when passing in a MenuItemReview", async () => {
     render(
       <Router>
-        <MenuItemReviewForm initialContents={menuItemReviewFixtures.oneReview} />
+        <MenuItemReviewForm
+          initialContents={menuItemReviewFixtures.oneReview}
+        />
       </Router>,
     );
     await screen.findByTestId(/MenuItemReviewForm-itemId/);
@@ -61,31 +63,38 @@ describe("MenuItemReviewForm tests", () => {
     await screen.findByTestId("MenuItemReviewForm-itemId");
 
     const itemIdField = screen.getByTestId("MenuItemReviewForm-itemId");
-    const reviewerEmailField = screen.getByTestId("MenuItemReviewForm-reviewerEmail");
+    const reviewerEmailField = screen.getByTestId(
+      "MenuItemReviewForm-reviewerEmail",
+    );
     const starsField = screen.getByTestId("MenuItemReviewForm-stars");
-    const dateReviewedField = screen.getByTestId("MenuItemReviewForm-dateReviewed");
+    const dateReviewedField = screen.getByTestId(
+      "MenuItemReviewForm-dateReviewed",
+    );
     const commentsField = screen.getByTestId("MenuItemReviewForm-comments");
     const submitButton = screen.getByTestId("MenuItemReviewForm-submit");
 
-    fireEvent.change(itemId, { target: { value: 32 } });
-    fireEvent.change(reviewerEmail, { target: { value: "cgaucho@ucsb.edu" } });
-    fireEvent.change(dateReviewed, {
+    fireEvent.change(itemIdField, { target: { value: 32 } });
+    fireEvent.change(reviewerEmailField, {
+      target: { value: "cgaucho@ucsb.edu" },
+    });
+    fireEvent.change(dateReviewedField, {
       target: { value: "2022-01-04T12:00:00" },
     });
-    fireEvent.change(stars, { target: { value: 1 } });
-    fireEvent.change(comments, { target: { value: "good" } });
+    fireEvent.change(starsField, { target: { value: 1 } });
+    fireEvent.change(commentsField, { target: { value: "good" } });
     fireEvent.click(submitButton);
 
     await waitFor(() => expect(mockSubmitAction).toHaveBeenCalled());
 
     expect(screen.queryByText(/ItemId is required/)).not.toBeInTheDocument();
-    expect(screen.queryByText(/ReviewerEmail is required/)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(/ReviewerEmail is required/),
+    ).not.toBeInTheDocument();
     expect(screen.queryByText(/Stars are required/)).not.toBeInTheDocument();
     expect(
       screen.queryByText(/dateReviewed must be in ISO format/),
     ).not.toBeInTheDocument();
     expect(screen.queryByText(/Comments are required/)).not.toBeInTheDocument();
-    
   });
 
   test("that navigate(-1) is called when Cancel is clicked", async () => {
