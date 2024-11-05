@@ -21,7 +21,7 @@ describe("UCSBDiningCommonsMenuItemForm tests", () => {
         <Router>
           <UCSBDiningCommonsMenuItemForm submitAction={() => {}} />
         </Router>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
     expect(await screen.findByText(/Create/)).toBeInTheDocument();
@@ -47,7 +47,7 @@ describe("UCSBDiningCommonsMenuItemForm tests", () => {
             buttonLabel="Update"
           />
         </Router>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
     expect(await screen.findByTestId(`${testId}-id`)).toBeInTheDocument();
@@ -63,13 +63,13 @@ describe("UCSBDiningCommonsMenuItemForm tests", () => {
         <Router>
           <UCSBDiningCommonsMenuItemForm submitAction={() => {}} />
         </Router>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
     const submitButton = screen.getByText(/Create/);
     fireEvent.click(submitButton);
 
-    await screen.findByText(/Dining Commons Code is required/);
+    expect(await screen.findByText(/Dining Commons Code is required/)).toBeInTheDocument();
     expect(screen.getByText(/Name is required/)).toBeInTheDocument();
     expect(screen.getByText(/Station is required/)).toBeInTheDocument();
   });
@@ -80,13 +80,15 @@ describe("UCSBDiningCommonsMenuItemForm tests", () => {
         <Router>
           <UCSBDiningCommonsMenuItemForm />
         </Router>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
     const cancelButton = screen.getByTestId(`${testId}-cancel`);
     fireEvent.click(cancelButton);
 
-    await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith(-1));
+    await waitFor(() => {
+      expect(mockedNavigate).toHaveBeenCalledWith(-1);
+    });
   });
 
   test("shows max length validation errors for all fields", async () => {
@@ -95,24 +97,26 @@ describe("UCSBDiningCommonsMenuItemForm tests", () => {
         <Router>
           <UCSBDiningCommonsMenuItemForm submitAction={() => {}} />
         </Router>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
-    const diningCommonsCodeField = screen.getByTestId(`${testId}-diningCommonsCode`);
+    const diningCommonsCodeField = screen.getByTestId(
+      `${testId}-diningCommonsCode`,
+    );
     const nameField = screen.getByTestId(`${testId}-name`);
     const stationField = screen.getByTestId(`${testId}-station`);
     const submitButton = screen.getByText(/Create/);
 
-    fireEvent.change(diningCommonsCodeField, { target: { value: "A".repeat(11) } }); // Exceeds max length of 10
+    fireEvent.change(diningCommonsCodeField, {
+      target: { value: "A".repeat(11) },
+    }); // Exceeds max length of 10
     fireEvent.change(nameField, { target: { value: "A".repeat(51) } }); // Exceeds max length of 50
     fireEvent.change(stationField, { target: { value: "A".repeat(51) } }); // Exceeds max length of 50
 
     fireEvent.click(submitButton);
 
-    await waitFor(() => {
-      expect(screen.getByText(/Max length is 10 characters/)).toBeInTheDocument();
-      expect(screen.getAllByText(/Max length is 50 characters/).length).toBe(2);
-    });
+    await screen.findByText(/Max length is 10 characters/);
+    expect(screen.getAllByText(/Max length is 50 characters/).length).toBe(2);
   });
 
   test("renders correct data-testid attributes", () => {
@@ -121,10 +125,12 @@ describe("UCSBDiningCommonsMenuItemForm tests", () => {
         <Router>
           <UCSBDiningCommonsMenuItemForm submitAction={() => {}} />
         </Router>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
-    expect(screen.getByTestId(`${testId}-diningCommonsCode`)).toBeInTheDocument();
+    expect(
+      screen.getByTestId(`${testId}-diningCommonsCode`),
+    ).toBeInTheDocument();
     expect(screen.getByTestId(`${testId}-name`)).toBeInTheDocument();
     expect(screen.getByTestId(`${testId}-station`)).toBeInTheDocument();
     expect(screen.getByTestId(`${testId}-submit`)).toBeInTheDocument();
