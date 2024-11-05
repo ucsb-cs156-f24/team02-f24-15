@@ -12,7 +12,6 @@ jest.mock("react-router-dom", () => ({
 
 describe("UCSBDiningCommonsMenuItemForm tests", () => {
   const queryClient = new QueryClient();
-
   const testId = "UCSBDiningCommonsMenuItemForm";
 
   test("renders correctly with no initialContents (create mode)", async () => {
@@ -115,10 +114,15 @@ describe("UCSBDiningCommonsMenuItemForm tests", () => {
     fireEvent.change(nameField, { target: { value: "A".repeat(51) } }); // Exceeds max length of 50
     fireEvent.change(stationField, { target: { value: "A".repeat(51) } }); // Exceeds max length of 50
 
-    // Wait for each validation error to appear individually
-    await screen.findByText(/Max length is 10 characters/);
-    await screen.findByText(/Max length is 50 characters/);
-    expect(screen.getAllByText(/Max length is 50 characters/).length).toBe(2);
+    fireEvent.click(submitButton);
+
+    // Wait for validation errors to appear individually
+    expect(
+      await screen.findByText(/Max length is 10 characters/),
+    ).toBeInTheDocument();
+    expect(
+      await screen.findAllByText(/Max length is 50 characters/),
+    ).toHaveLength(2);
   });
 
   test("renders correct data-testid attributes", () => {
