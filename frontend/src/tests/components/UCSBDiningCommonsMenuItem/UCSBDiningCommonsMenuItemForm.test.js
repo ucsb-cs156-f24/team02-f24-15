@@ -69,9 +69,11 @@ describe("UCSBDiningCommonsMenuItemForm tests", () => {
     const submitButton = screen.getByText(/Create/);
     fireEvent.click(submitButton);
 
-    expect(await screen.findByText(/Dining Commons Code is required/)).toBeInTheDocument();
-    expect(screen.getByText(/Name is required/)).toBeInTheDocument();
-    expect(screen.getByText(/Station is required/)).toBeInTheDocument();
+    expect(
+      await screen.findByText(/Dining Commons Code is required/),
+    ).toBeInTheDocument();
+    expect(await screen.findByText(/Name is required/)).toBeInTheDocument();
+    expect(await screen.findByText(/Station is required/)).toBeInTheDocument();
   });
 
   test("that navigate(-1) is called when Cancel is clicked", async () => {
@@ -113,9 +115,9 @@ describe("UCSBDiningCommonsMenuItemForm tests", () => {
     fireEvent.change(nameField, { target: { value: "A".repeat(51) } }); // Exceeds max length of 50
     fireEvent.change(stationField, { target: { value: "A".repeat(51) } }); // Exceeds max length of 50
 
-    fireEvent.click(submitButton);
-
+    // Wait for each validation error to appear individually
     await screen.findByText(/Max length is 10 characters/);
+    await screen.findByText(/Max length is 50 characters/);
     expect(screen.getAllByText(/Max length is 50 characters/).length).toBe(2);
   });
 
