@@ -16,7 +16,11 @@ jest.mock("react-router-dom", () => ({
 describe("UCSBOrganizationForm tests", () => {
   const queryClient = new QueryClient();
 
-  const expectedHeaders = ["Organization Code", "Organization Translation Short", "Organization Translation"];
+  const expectedHeaders = [
+    "Organization Code",
+    "Organization Translation Short",
+    "Organization Translation",
+  ];
   const testId = "UCSBOrganizationForm";
 
   test("renders correctly with no initialContents", async () => {
@@ -36,19 +40,22 @@ describe("UCSBOrganizationForm tests", () => {
     });
 
     expect(screen.getByTestId(`${testId}-orgCode`)).toBeInTheDocument();
-    expect(screen.getByTestId(`${testId}-orgTranslationShort`)).toBeInTheDocument();
+    expect(
+      screen.getByTestId(`${testId}-orgTranslationShort`),
+    ).toBeInTheDocument();
     expect(screen.getByTestId(`${testId}-orgTranslation`)).toBeInTheDocument();
     expect(screen.getByTestId(`${testId}-inactive`)).toBeInTheDocument();
     expect(screen.getByTestId(`${testId}-submit`)).toBeInTheDocument();
     expect(screen.getByTestId(`${testId}-cancel`)).toBeInTheDocument();
-
   });
 
   test("renders correctly when passing in initialContents", async () => {
     render(
       <QueryClientProvider client={queryClient}>
         <Router>
-          <UCSBOrganizationForm initialContents={ucsbOrganizationFixtures.oneOrganization} />
+          <UCSBOrganizationForm
+            initialContents={ucsbOrganizationFixtures.oneOrganization}
+          />
         </Router>
       </QueryClientProvider>,
     );
@@ -61,12 +68,12 @@ describe("UCSBOrganizationForm tests", () => {
     });
 
     expect(screen.getByTestId(`${testId}-orgCode`)).toBeInTheDocument();
-    expect(screen.getByTestId(`${testId}-orgTranslationShort`)).toBeInTheDocument();
+    expect(
+      screen.getByTestId(`${testId}-orgTranslationShort`),
+    ).toBeInTheDocument();
     expect(screen.getByTestId(`${testId}-orgTranslation`)).toBeInTheDocument();
     expect(screen.getByTestId(`${testId}-inactive`)).toBeInTheDocument();
-   
   });
-
 
   test("that navigate(-1) is called when Cancel is clicked", async () => {
     render(
@@ -92,7 +99,6 @@ describe("UCSBOrganizationForm tests", () => {
         </Router>
       </QueryClientProvider>,
     );
-
 
     const submitButton = await screen.findByText(/Create/);
     fireEvent.click(submitButton);

@@ -7,19 +7,19 @@ function UCSBOrganizationForm({
   submitAction,
   buttonLabel = "Create",
 }) {
- // Stryker disable all
- const {
+  // Stryker disable all
+  const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm({ defaultValues: initialContents || {} });
-   // Stryker restore all
+  // Stryker restore all
 
-   const navigate = useNavigate();
+  const navigate = useNavigate();
 
-   const testIdPrefix = "UCSBOrganizationForm";
+  const testIdPrefix = "UCSBOrganizationForm";
 
-   return (
+  return (
     <Form onSubmit={handleSubmit(submitAction)}>
       <Form.Group className="mb-3">
         <Form.Label htmlFor="orgCode">Organization Code</Form.Label>
@@ -38,7 +38,9 @@ function UCSBOrganizationForm({
       </Form.Group>
 
       <Form.Group className="mb-3">
-        <Form.Label htmlFor="orgTranslationShort">Organization Translation Short</Form.Label>
+        <Form.Label htmlFor="orgTranslationShort">
+          Organization Translation Short
+        </Form.Label>
         <Form.Control
           data-testid={testIdPrefix + "-orgTranslationShort"}
           id="orgTranslationShort"
@@ -54,7 +56,9 @@ function UCSBOrganizationForm({
       </Form.Group>
 
       <Form.Group className="mb-3">
-        <Form.Label htmlFor="orgTranslation">Organization Translation</Form.Label>
+        <Form.Label htmlFor="orgTranslation">
+          Organization Translation
+        </Form.Label>
         <Form.Control
           data-testid={testIdPrefix + "-orgTranslation"}
           id="orgTranslation"
