@@ -4,8 +4,8 @@ const ucsbDiningCommonsMenuItemFixtures = {
     diningCommonsCode: "DLG",
     name: "Burger",
     station: "Grill Station",
- },
-  
+  },
+
   threeItems: [
     {
       id: 2,
@@ -27,5 +27,5 @@ const ucsbDiningCommonsMenuItemFixtures = {
     },
   ],
 };
-  
+
 export { ucsbDiningCommonsMenuItemFixtures };
