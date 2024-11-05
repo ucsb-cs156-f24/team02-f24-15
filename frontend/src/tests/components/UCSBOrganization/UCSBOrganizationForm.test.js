@@ -16,7 +16,7 @@ jest.mock("react-router-dom", () => ({
 describe("UCSBOrganizationForm tests", () => {
   const queryClient = new QueryClient();
 
-  const expectedHeaders = ["orgTranslationShort", "orgTranslation", "inactive"];
+  const expectedHeaders = ["Organization Code", "Organization Translation Short", "Organization Translation"];
   const testId = "UCSBOrganizationForm";
 
   test("renders correctly with no initialContents", async () => {
@@ -34,6 +34,14 @@ describe("UCSBOrganizationForm tests", () => {
       const header = screen.getByText(headerText);
       expect(header).toBeInTheDocument();
     });
+
+    expect(screen.getByTestId(`${testId}-orgCode`)).toBeInTheDocument();
+    expect(screen.getByTestId(`${testId}-orgTranslationShort`)).toBeInTheDocument();
+    expect(screen.getByTestId(`${testId}-orgTranslation`)).toBeInTheDocument();
+    expect(screen.getByTestId(`${testId}-inactive`)).toBeInTheDocument();
+    expect(screen.getByTestId(`${testId}-submit`)).toBeInTheDocument();
+    expect(screen.getByTestId(`${testId}-cancel`)).toBeInTheDocument();
+
   });
 
   test("renders correctly when passing in initialContents", async () => {
@@ -52,9 +60,13 @@ describe("UCSBOrganizationForm tests", () => {
       expect(header).toBeInTheDocument();
     });
 
-    expect(await screen.findByTestId(`${testId}-orgCode`)).toBeInTheDocument();
-    expect(screen.getByText(`Organization Code`)).toBeInTheDocument();
+    expect(screen.getByTestId(`${testId}-orgCode`)).toBeInTheDocument();
+    expect(screen.getByTestId(`${testId}-orgTranslationShort`)).toBeInTheDocument();
+    expect(screen.getByTestId(`${testId}-orgTranslation`)).toBeInTheDocument();
+    expect(screen.getByTestId(`${testId}-inactive`)).toBeInTheDocument();
+   
   });
+
 
   test("that navigate(-1) is called when Cancel is clicked", async () => {
     render(
@@ -81,37 +93,35 @@ describe("UCSBOrganizationForm tests", () => {
       </QueryClientProvider>,
     );
 
-    /*expect(await screen.findByText(/Create/)).toBeInTheDocument();
-    const submitButton = screen.getByText(/Create/);
-    fireEvent.click(submitButton);
-
-    await screen.findByText(/Name is required/);
-    expect(screen.getByText(/Description is required/)).toBeInTheDocument();
-
-    const nameInput = screen.getByTestId(`${testId}-name`);
-    fireEvent.change(nameInput, { target: { value: "a".repeat(31) } });
-    fireEvent.click(submitButton);
-
-    await waitFor(() => {
-      expect(screen.getByText(/Max length 30 characters/)).toBeInTheDocument();
-    });*/
 
     const submitButton = await screen.findByText(/Create/);
     fireEvent.click(submitButton);
 
-    await waitFor(() => {
-      expectedHeaders.forEach(async headerText => {
-        expect(await screen.findByText(`${headerText} is required`)).toBeInTheDocument();
-      });
-    });
+    await screen.findByText(/Organization Code is required./);
+    expect(
+      screen.getByText(/Organization Translation Short is required./),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/Organization Translation is required./),
+    ).toBeInTheDocument();
+    expect(screen.getByText(/Status is required./)).toBeInTheDocument();
+  });
 
-    // Check specific field validation example for maximum length
-    /*const shortDescriptionInput = screen.getByTestId(`${testId}-orgTranslationShort`);
-    fireEvent.change(shortDescriptionInput, { target: { value: "a".repeat(256) } }); // Assuming a max length validation
-    fireEvent.click(submitButton);
+  test("selects the correct option in the inactive dropdown", async () => {
+    render(
+      <QueryClientProvider client={queryClient}>
+        <Router>
+          <UCSBOrganizationForm />
+        </Router>
+      </QueryClientProvider>,
+    );
 
-    await waitFor(() => {
-      expect(screen.getByText(/Max length 255 characters/)).toBeInTheDocument(); // Adjust max length validation message as needed
-    });*/
+    const inactiveDropdown = screen.getByTestId(`${testId}-inactive`);
+
+    fireEvent.change(inactiveDropdown, { target: { value: "true" } });
+    expect(inactiveDropdown.value).toBe("true");
+
+    fireEvent.change(inactiveDropdown, { target: { value: "false" } });
+    expect(inactiveDropdown.value).toBe("false");
   });
 });
