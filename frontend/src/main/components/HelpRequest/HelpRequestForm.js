@@ -168,7 +168,6 @@ function HelpRequestForm({
         </Col>
       </Row>
 
-
       <Row>
         <Col>
           <Button type="submit" data-testid="HelpRequestForm-submit">
