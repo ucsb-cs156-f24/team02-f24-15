@@ -40,8 +40,14 @@ describe("RecommendationRequestForm tests", () => {
         <RecommendationRequestForm />
       </Router>,
     );
-    // change to only test inputs that need correct form (local date times)
+   
     await screen.findByTestId("RecommendationRequestForm-requesterEmail");
+    const requesterEmailField = screen.getByTestId(
+      "RecommendationRequestForm-requesterEmail",
+    );
+    const professorEmailField = screen.getByTestId(
+      "RecommendationRequestForm-professorEmail",
+    );
     const dateRequestedField = screen.getByTestId(
       "RecommendationRequestForm-dateRequested",
     );
@@ -50,9 +56,14 @@ describe("RecommendationRequestForm tests", () => {
     );
     const submitButton = screen.getByTestId("RecommendationRequestForm-submit");
 
+    fireEvent.change(requesterEmailField, { target: { value: "bad-input" } });
+    fireEvent.change(professorEmailField, { target: { value: "bad-input" } });
     fireEvent.change(dateRequestedField, { target: { value: "bad-input" } });
     fireEvent.change(dateNeededField, { target: { value: "bad-input" } });
     fireEvent.click(submitButton);
+
+    await screen.findByText(/requesterEmail must be in format of user@domain.extension/);
+    await screen.findByText(/professorEmail must be in format of user@domain.extension/);
   });
 
   test("Correct Error messsages on missing input", async () => {
