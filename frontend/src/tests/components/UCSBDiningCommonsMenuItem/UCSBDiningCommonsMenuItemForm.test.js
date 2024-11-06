@@ -116,13 +116,15 @@ describe("UCSBDiningCommonsMenuItemForm tests", () => {
 
     fireEvent.click(submitButton);
 
-    // Wait for validation errors to appear individually
+    // Use findAllByText for multiple matches
+    const maxLengthErrors = await screen.findAllByText(
+      /Max length is 50 characters/,
+    );
+    expect(maxLengthErrors.length).toBe(2);
+
     expect(
       await screen.findByText(/Max length is 10 characters/),
     ).toBeInTheDocument();
-    expect(
-      await screen.findAllByText(/Max length is 50 characters/),
-    ).toHaveLength(2);
   });
 
   test("renders correct data-testid attributes", () => {
