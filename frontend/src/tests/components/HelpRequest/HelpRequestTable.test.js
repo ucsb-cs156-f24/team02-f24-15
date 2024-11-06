@@ -31,8 +31,24 @@ describe("HelpRequestTable tests", () => {
       </QueryClientProvider>,
     );
 
-    const expectedHeaders = ["ID", "Requester Email", "Team", "Table or Breakout Room", "Request Time", "Explanation", "Solved"];
-    const expectedFields = ["id", "requesterEmail", "teamId", "tableOrBreakoutRoom", "requestTime", "explanation", "solved"];
+    const expectedHeaders = [
+      "ID",
+      "Requester Email",
+      "Team",
+      "Table or Breakout Room",
+      "Request Time",
+      "Explanation",
+      "Solved",
+    ];
+    const expectedFields = [
+      "id",
+      "requesterEmail",
+      "teamId",
+      "tableOrBreakoutRoom",
+      "requestTime",
+      "explanation",
+      "solved",
+    ];
     const testId = "HelpRequestTable";
 
     expectedHeaders.forEach((headerText) => {
@@ -45,13 +61,21 @@ describe("HelpRequestTable tests", () => {
       expect(header).toBeInTheDocument();
     });
 
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("1");
-    expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("2");
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent(
+      "1",
+    );
+    expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent(
+      "2",
+    );
 
-    const editButton = screen.queryByTestId(`${testId}-cell-row-0-col-Edit-button`);
+    const editButton = screen.queryByTestId(
+      `${testId}-cell-row-0-col-Edit-button`,
+    );
     expect(editButton).not.toBeInTheDocument();
 
-    const deleteButton = screen.queryByTestId(`${testId}-cell-row-0-col-Delete-button`);
+    const deleteButton = screen.queryByTestId(
+      `${testId}-cell-row-0-col-Delete-button`,
+    );
     expect(deleteButton).not.toBeInTheDocument();
   });
 
@@ -69,8 +93,24 @@ describe("HelpRequestTable tests", () => {
       </QueryClientProvider>,
     );
 
-    const expectedHeaders = ["ID", "Requester Email", "Team", "Table or Breakout Room", "Request Time", "Explanation", "Solved"];
-    const expectedFields = ["id", "requesterEmail", "teamId", "tableOrBreakoutRoom", "requestTime", "explanation", "solved"];
+    const expectedHeaders = [
+      "ID",
+      "Requester Email",
+      "Team",
+      "Table or Breakout Room",
+      "Request Time",
+      "Explanation",
+      "Solved",
+    ];
+    const expectedFields = [
+      "id",
+      "requesterEmail",
+      "teamId",
+      "tableOrBreakoutRoom",
+      "requestTime",
+      "explanation",
+      "solved",
+    ];
     const testId = "HelpRequestTable";
 
     expectedHeaders.forEach((headerText) => {
@@ -83,14 +123,22 @@ describe("HelpRequestTable tests", () => {
       expect(header).toBeInTheDocument();
     });
 
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("1");
-    expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("2");
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent(
+      "1",
+    );
+    expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent(
+      "2",
+    );
 
-    const editButton = screen.getByTestId(`${testId}-cell-row-0-col-Edit-button`);
+    const editButton = screen.getByTestId(
+      `${testId}-cell-row-0-col-Edit-button`,
+    );
     expect(editButton).toBeInTheDocument();
     expect(editButton).toHaveClass("btn-primary");
 
-    const deleteButton = screen.getByTestId(`${testId}-cell-row-0-col-Delete-button`);
+    const deleteButton = screen.getByTestId(
+      `${testId}-cell-row-0-col-Delete-button`,
+    );
     expect(deleteButton).toBeInTheDocument();
     expect(deleteButton).toHaveClass("btn-danger");
   });
@@ -110,22 +158,30 @@ describe("HelpRequestTable tests", () => {
     );
 
     await waitFor(() => {
-      expect(screen.getByTestId(`HelpRequestTable-cell-row-0-col-id`)).toHaveTextContent("1");
+      expect(
+        screen.getByTestId(`HelpRequestTable-cell-row-0-col-id`),
+      ).toHaveTextContent("1");
     });
 
-    const editButton = screen.getByTestId(`HelpRequestTable-cell-row-0-col-Edit-button`);
+    const editButton = screen.getByTestId(
+      `HelpRequestTable-cell-row-0-col-Edit-button`,
+    );
     expect(editButton).toBeInTheDocument();
 
     fireEvent.click(editButton);
 
-    await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith("/helprequests/edit/1"));
+    await waitFor(() =>
+      expect(mockedNavigate).toHaveBeenCalledWith("/helprequests/edit/1"),
+    );
   });
 
   test("Delete button calls delete callback", async () => {
     const currentUser = currentUserFixtures.adminUser;
 
     const axiosMock = new AxiosMockAdapter(axios);
-    axiosMock.onDelete("/api/helprequests").reply(200, { message: "Help request deleted" });
+    axiosMock
+      .onDelete("/api/helprequests")
+      .reply(200, { message: "Help request deleted" });
 
     render(
       <QueryClientProvider client={queryClient}>
@@ -139,10 +195,14 @@ describe("HelpRequestTable tests", () => {
     );
 
     await waitFor(() => {
-      expect(screen.getByTestId(`HelpRequestTable-cell-row-0-col-id`)).toHaveTextContent("1");
+      expect(
+        screen.getByTestId(`HelpRequestTable-cell-row-0-col-id`),
+      ).toHaveTextContent("1");
     });
 
-    const deleteButton = screen.getByTestId(`HelpRequestTable-cell-row-0-col-Delete-button`);
+    const deleteButton = screen.getByTestId(
+      `HelpRequestTable-cell-row-0-col-Delete-button`,
+    );
     expect(deleteButton).toBeInTheDocument();
 
     fireEvent.click(deleteButton);
@@ -150,5 +210,4 @@ describe("HelpRequestTable tests", () => {
     await waitFor(() => expect(axiosMock.history.delete.length).toBe(1));
     expect(axiosMock.history.delete[0].params).toEqual({ id: 1 });
   });
-
 });
