@@ -53,7 +53,9 @@ describe("ArticlesForm tests", () => {
     fireEvent.change(dateAddedField, { target: { value: "bad-input" } });
     fireEvent.click(submitButton);
 
-    await screen.findByText(/Email must be in the format username@domain.extension/);
+    await screen.findByText(
+      /Email must be in the format username@domain.extension/,
+    );
   });
 
   test("Correct Error messsages on missing input", async () => {
@@ -94,7 +96,9 @@ describe("ArticlesForm tests", () => {
 
     fireEvent.change(titleField, { target: { value: "A wonderful Article" } });
     fireEvent.change(urlField, { target: { value: "awonderfularticle.com" } });
-    fireEvent.change(explanationField, { target: { value: "A wonderful Article..." } });
+    fireEvent.change(explanationField, {
+      target: { value: "A wonderful Article..." },
+    });
     fireEvent.change(emailField, { target: { value: "writer@ucsb.edu" } });
     fireEvent.change(dateAddedField, {
       target: { value: "2022-01-02T12:00" },
@@ -103,17 +107,15 @@ describe("ArticlesForm tests", () => {
 
     await waitFor(() => expect(mockSubmitAction).toHaveBeenCalled());
 
-    expect(
-      screen.queryByText(/Title is required./),
-    ).not.toBeInTheDocument();
-    expect(
-      screen.queryByText(/Url is required./),
-    ).not.toBeInTheDocument();
+    expect(screen.queryByText(/Title is required./)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Url is required./)).not.toBeInTheDocument();
     expect(
       screen.queryByText(/Explanation is required./),
     ).not.toBeInTheDocument();
     expect(
-      screen.queryByText(/Email must be in the format username@domain.extension/),
+      screen.queryByText(
+        /Email must be in the format username@domain.extension/,
+      ),
     ).not.toBeInTheDocument();
     expect(
       screen.queryByText(/dateAdded must be in ISO format/),

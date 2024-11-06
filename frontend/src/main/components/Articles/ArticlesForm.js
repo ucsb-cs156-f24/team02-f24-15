@@ -23,7 +23,7 @@ function ArticlesForm({
   // Stryker disable Regex
   const isodate_regex =
     /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
-  const email_regex = 
+  const email_regex =
     /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
   // Stryker restore Regex
 
@@ -130,7 +130,7 @@ function ArticlesForm({
       </Row>
 
       <Row>
-      <Col>
+        <Col>
           <Form.Group className="mb-3">
             <Form.Label htmlFor="dateAdded">Date Added (iso format)</Form.Label>
             <Form.Control
