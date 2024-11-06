@@ -40,7 +40,7 @@ describe("RecommendationRequestForm tests", () => {
         <RecommendationRequestForm />
       </Router>,
     );
-   
+
     await screen.findByTestId("RecommendationRequestForm-requesterEmail");
     const requesterEmailField = screen.getByTestId(
       "RecommendationRequestForm-requesterEmail",
@@ -62,8 +62,12 @@ describe("RecommendationRequestForm tests", () => {
     fireEvent.change(dateNeededField, { target: { value: "bad-input" } });
     fireEvent.click(submitButton);
 
-    await screen.findByText(/requesterEmail must be in format of user@domain.extension/);
-    await screen.findByText(/professorEmail must be in format of user@domain.extension/);
+    await screen.findByText(
+      /requesterEmail must be in format of user@domain.extension/,
+    );
+    await screen.findByText(
+      /professorEmail must be in format of user@domain.extension/,
+    );
   });
 
   test("Correct Error messsages on missing input", async () => {
