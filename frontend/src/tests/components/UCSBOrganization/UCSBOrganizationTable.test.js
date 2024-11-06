@@ -17,7 +17,11 @@ jest.mock("react-router-dom", () => ({
 describe("UCSBOrganizationTable tests", () => {
   const queryClient = new QueryClient();
 
-  const expectedHeaders = ["Organization Code", "Organization Translation Short", "Organization Translation"];
+  const expectedHeaders = [
+    "Organization Code",
+    "Organization Translation Short",
+    "Organization Translation",
+  ];
   const expectedFields = ["orgCode", "orgTranslationShort", "orgTranslation"];
   const testId = "UCSBOrganizationTable";
 
@@ -88,7 +92,7 @@ describe("UCSBOrganizationTable tests", () => {
     expect(
       screen.getByTestId(`${testId}-cell-row-1-col-orgTranslationShort`),
     ).toHaveTextContent("Delta Sigma Pi");
-    
+
     const editButton = screen.getByTestId(
       `${testId}-cell-row-0-col-Edit-button`,
     );
@@ -171,7 +175,6 @@ describe("UCSBOrganizationTable tests", () => {
       screen.getByTestId(`${testId}-cell-row-0-col-orgTranslationShort`),
     ).toHaveTextContent("Gaucho Creative");
 
-
     const editButton = screen.getByTestId(
       `${testId}-cell-row-0-col-Edit-button`,
     );
@@ -182,9 +185,7 @@ describe("UCSBOrganizationTable tests", () => {
 
     // assert - check that the navigate function was called with the expected path
     await waitFor(() =>
-      expect(mockedNavigate).toHaveBeenCalledWith(
-        "/ucsborganization/edit/GCR",
-      ),
+      expect(mockedNavigate).toHaveBeenCalledWith("/ucsborganization/edit/GCR"),
     );
   });
 
