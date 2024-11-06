@@ -83,6 +83,7 @@ describe("RecommendationRequestForm tests", () => {
     const explanationField = screen.getByTestId("RecommendationRequestForm-explanation");
     const dateRequestedField = screen.getByTestId("RecommendationRequestForm-dateRequested");
     const dateNeededField = screen.getByTestId("RecommendationRequestForm-dateNeeded");
+    const doneField = screen.getByTestId("RecommendationRequestForm-done");
     const submitButton = screen.getByTestId("RecommendationRequestForm-submit");
 
     fireEvent.change(requesterEmailField, { target: { value: "request1@gmail.com" } });
