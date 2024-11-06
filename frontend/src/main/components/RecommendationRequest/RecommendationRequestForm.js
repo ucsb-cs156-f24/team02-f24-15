@@ -23,8 +23,6 @@ function RecommendationRequestForm({
   // Stryker disable Regex
   const isodate_regex =
     /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
-  const email_regex =
-    /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
 
   return (
     <Form onSubmit={handleSubmit(submitAction)}>
@@ -55,13 +53,10 @@ function RecommendationRequestForm({
               isInvalid={Boolean(errors.requesterEmail)}
               {...register("requesterEmail", {
                 required: true,
-                pattern: email_regex,
               })}
             />
             <Form.Control.Feedback type="invalid">
               {errors.requesterEmail && "requesterEmail is required."}
-              {errors.requesterEmail?.type === "pattern" &&
-                "requesterEmail must be in format of user@domain.extension"}
             </Form.Control.Feedback>
           </Form.Group>
         </Col>
@@ -75,13 +70,10 @@ function RecommendationRequestForm({
               isInvalid={Boolean(errors.professorEmail)}
               {...register("professorEmail", {
                 required: true,
-                pattern: email_regex,
               })}
             />
             <Form.Control.Feedback type="invalid">
               {errors.professorEmail && "professorEmail is required."}
-              {errors.requesterEmail?.type === "pattern" &&
-                "professorEmail must be in format of user@domain.extension"}
             </Form.Control.Feedback>
           </Form.Group>
         </Col>

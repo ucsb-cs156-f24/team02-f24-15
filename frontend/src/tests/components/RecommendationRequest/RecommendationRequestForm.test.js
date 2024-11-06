@@ -61,13 +61,6 @@ describe("RecommendationRequestForm tests", () => {
     fireEvent.change(dateRequestedField, { target: { value: "bad-input" } });
     fireEvent.change(dateNeededField, { target: { value: "bad-input" } });
     fireEvent.click(submitButton);
-
-    await screen.findByText(
-      /requesterEmail must be in format of user@domain.extension/,
-    );
-    await screen.findByText(
-      /professorEmail must be in format of user@domain.extension/,
-    );
   });
 
   test("Correct Error messsages on missing input", async () => {
