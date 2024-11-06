@@ -46,8 +46,6 @@ describe("HelpRequestCreatePage tests", () => {
       .reply(200, systemInfoFixtures.showingNeither);
   });
 
-  
-
   test("renders without crashing", async () => {
     const queryClient = new QueryClient();
     render(
@@ -102,8 +100,12 @@ describe("HelpRequestCreatePage tests", () => {
     fireEvent.change(emailInput, { target: { value: "student1@example.com" } });
     fireEvent.change(teamIdInput, { target: { value: "team01" } });
     fireEvent.change(roomInput, { target: { value: "Table 1" } });
-    fireEvent.change(requestTimeInput, { target: { value: "2024-10-30T03:58:52.325Z" } });
-    fireEvent.change(explanationInput, { target: { value: "Need help with project setup" } });
+    fireEvent.change(requestTimeInput, {
+      target: { value: "2024-10-30T03:58:52.325Z" },
+    });
+    fireEvent.change(explanationInput, {
+      target: { value: "Need help with project setup" },
+    });
     fireEvent.click(solvedCheckbox); // Checked = false
 
     fireEvent.click(createButton);
