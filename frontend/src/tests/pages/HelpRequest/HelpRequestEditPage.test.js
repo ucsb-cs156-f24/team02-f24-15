@@ -48,7 +48,7 @@ describe("HelpRequestEditPage tests", () => {
       axiosMock
         .onGet("/api/systemInfo")
         .reply(200, systemInfoFixtures.showingNeither);
-      axiosMock.onGet("/api/helprequests", { params: { id: 5 } }).timeout();
+      axiosMock.onGet("/api/helprequest", { params: { id: 5 } }).timeout();
     });
 
     const queryClient = new QueryClient();
@@ -82,7 +82,7 @@ describe("HelpRequestEditPage tests", () => {
       axiosMock
         .onGet("/api/systemInfo")
         .reply(200, systemInfoFixtures.showingNeither);
-      axiosMock.onGet("/api/helprequests", { params: { id: 5 } }).reply(200, {
+      axiosMock.onGet("/api/helprequest", { params: { id: 5 } }).reply(200, {
         id: 5,
         requesterEmail: "student1@example.com",
         teamId: "team01",
@@ -91,7 +91,7 @@ describe("HelpRequestEditPage tests", () => {
         explanation: "Need help with project setup",
         solved: false,
       });
-      axiosMock.onPut("/api/helprequests").reply(200, {
+      axiosMock.onPut("/api/helprequest").reply(200, {
         id: 5,
         requesterEmail: "student1@example.com",
         teamId: "team01",

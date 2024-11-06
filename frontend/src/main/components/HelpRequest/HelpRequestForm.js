@@ -162,16 +162,12 @@ function HelpRequestForm({
               data-testid="HelpRequestForm-solved"
               id="solved"
               type="checkbox"
-              {...register("solved", {
-                required: "Solved status is required.",
-              })}
+              {...register("solved")}
             />
-            <Form.Control.Feedback type="invalid">
-              {errors.solved?.message}
-            </Form.Control.Feedback>
           </Form.Group>
         </Col>
       </Row>
+
 
       <Row>
         <Col>

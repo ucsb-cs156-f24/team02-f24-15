@@ -171,7 +171,7 @@ describe("HelpRequestTable tests", () => {
     fireEvent.click(editButton);
 
     await waitFor(() =>
-      expect(mockedNavigate).toHaveBeenCalledWith("/helprequests/edit/1"),
+      expect(mockedNavigate).toHaveBeenCalledWith("/helprequest/edit/1"),
     );
   });
 
@@ -180,7 +180,7 @@ describe("HelpRequestTable tests", () => {
 
     const axiosMock = new AxiosMockAdapter(axios);
     axiosMock
-      .onDelete("/api/helprequests")
+      .onDelete("/api/helprequest")
       .reply(200, { message: "Help request deleted" });
 
     render(

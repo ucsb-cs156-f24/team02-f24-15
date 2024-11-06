@@ -51,7 +51,7 @@ describe("HelpRequestIndexPage tests", () => {
 
   test("Renders with Create Button for admin user", async () => {
     setupAdminUser();
-    axiosMock.onGet("/api/helprequests/all").reply(200, []);
+    axiosMock.onGet("/api/helprequest/all").reply(200, []);
 
     render(
       <QueryClientProvider client={queryClient}>
@@ -72,7 +72,7 @@ describe("HelpRequestIndexPage tests", () => {
   test("renders three help requests correctly for regular user", async () => {
     setupUserOnly();
     axiosMock
-      .onGet("/api/helprequests/all")
+      .onGet("/api/helprequest/all")
       .reply(200, helpRequestFixtures.threeRequests);
 
     render(
@@ -112,7 +112,7 @@ describe("HelpRequestIndexPage tests", () => {
   test("renders empty table when backend unavailable, user only", async () => {
     setupUserOnly();
 
-    axiosMock.onGet("/api/helprequests/all").timeout();
+    axiosMock.onGet("/api/helprequest/all").timeout();
 
     const restoreConsole = mockConsole();
 
@@ -130,7 +130,7 @@ describe("HelpRequestIndexPage tests", () => {
 
     const errorMessage = console.error.mock.calls[0][0];
     expect(errorMessage).toMatch(
-      "Error communicating with backend via GET on /api/helprequests/all",
+      "Error communicating with backend via GET on /api/helprequest/all",
     );
     restoreConsole();
   });
@@ -139,10 +139,10 @@ describe("HelpRequestIndexPage tests", () => {
     setupAdminUser();
 
     axiosMock
-      .onGet("/api/helprequests/all")
+      .onGet("/api/helprequest/all")
       .reply(200, helpRequestFixtures.threeHelpRequests);
     axiosMock
-      .onDelete("/api/helprequests")
+      .onDelete("/api/helprequest")
       .reply(200, "HelpRequest with id 1 was deleted");
 
     render(
@@ -177,7 +177,7 @@ describe("HelpRequestIndexPage tests", () => {
     await waitFor(() => {
       expect(axiosMock.history.delete.length).toBe(1);
     });
-    expect(axiosMock.history.delete[0].url).toBe("/api/helprequests");
+    expect(axiosMock.history.delete[0].url).toBe("/api/helprequest");
     expect(axiosMock.history.delete[0].params).toEqual({ id: 1 });
   });
 });
