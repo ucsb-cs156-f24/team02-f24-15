@@ -16,9 +16,11 @@ const Template = (args) => {
 export const Empty = Template.bind({});
 Empty.args = {
   helpRequests: [],
+  currentUser: currentUserFixtures.userOnly,
 };
 
 export const ThreeItemsOrdinaryUser = Template.bind({});
+
 ThreeItemsOrdinaryUser.args = {
   helpRequests: helpRequestFixtures.threeRequests,
   currentUser: currentUserFixtures.userOnly,
