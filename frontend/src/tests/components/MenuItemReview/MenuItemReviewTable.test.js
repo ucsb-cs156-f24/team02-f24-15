@@ -14,7 +14,7 @@ jest.mock("react-router-dom", () => ({
   useNavigate: () => mockedNavigate,
 }));
 
-describe("UserTable tests", () => {
+describe("UserTable tests", () => { //
   const queryClient = new QueryClient();
 
   test("Has the expected column headers and content for ordinary user", () => {
@@ -178,7 +178,7 @@ describe("UserTable tests", () => {
     const axiosMock = new AxiosMockAdapter(axios);
     axiosMock
       .onDelete("/api/menuitemreview")
-      .reply(200, { message: "Date deleted" });
+      .reply(200, { message: "MenuItemReview deleted" });
 
     // act - render the component
     render(
