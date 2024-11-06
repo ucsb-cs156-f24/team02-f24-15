@@ -18,7 +18,7 @@ function HelpRequestForm({
   const navigate = useNavigate();
 
   // Stryker disable Regex
-  const email_regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+  const email_regex = /^[\w.-]+@([\w-]+\.)+[\w-]{2,4}$/;
   const isoDate_regex =
     /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
   // Stryker recover Regex
@@ -82,7 +82,9 @@ function HelpRequestForm({
 
         <Col>
           <Form.Group className="mb-3">
-            <Form.Label htmlFor="tableOrBreakoutRoom">Table or Breakout Room</Form.Label>
+            <Form.Label htmlFor="tableOrBreakoutRoom">
+              Table or Breakout Room
+            </Form.Label>
             <Form.Control
               data-testid="HelpRequestForm-tableOrBreakoutRoom"
               id="tableOrBreakoutRoom"
@@ -100,7 +102,9 @@ function HelpRequestForm({
 
         <Col>
           <Form.Group className="mb-3">
-            <Form.Label htmlFor="requestTime">Request Time (iso format)</Form.Label>
+            <Form.Label htmlFor="requestTime">
+              Request Time (iso format)
+            </Form.Label>
             <Form.Control
               data-testid="HelpRequestForm-requestTime"
               id="requestTime"
@@ -129,7 +133,9 @@ function HelpRequestForm({
               type="text"
               as="textarea"
               isInvalid={Boolean(errors.explanation)}
-              {...register("explanation", { required: "Explanation is required." })}
+              {...register("explanation", {
+                required: "Explanation is required.",
+              })}
             />
             <Form.Control.Feedback type="invalid">
               {errors.explanation?.message}
@@ -144,8 +150,8 @@ function HelpRequestForm({
               data-testid="HelpRequestForm-solved"
               id="solved"
               type="checkbox"
-              {...register("solved", { 
-                required: "Solved status is required." 
+              {...register("solved", {
+                required: "Solved status is required.",
               })}
             />
             <Form.Control.Feedback type="invalid">
