@@ -31,8 +31,24 @@ describe("UserTable tests", () => {
       </QueryClientProvider>,
     );
 
-    const expectedHeaders = ["id", "RequesterEmail", "ProfessorEmail", "Explanation", "DateRequested", "DateNeeded", "Done"];
-    const expectedFields = ["id", "requesterEmail", "professorEmail", "explanation", "dateRequested", "dateNeeded", "done"];
+    const expectedHeaders = [
+      "id",
+      "RequesterEmail",
+      "ProfessorEmail",
+      "Explanation",
+      "DateRequested",
+      "DateNeeded",
+      "Done",
+    ];
+    const expectedFields = [
+      "id",
+      "requesterEmail",
+      "professorEmail",
+      "explanation",
+      "dateRequested",
+      "dateNeeded",
+      "done",
+    ];
     const testId = "RecommendationRequestTable";
 
     expectedHeaders.forEach((headerText) => {
@@ -77,8 +93,24 @@ describe("UserTable tests", () => {
       </QueryClientProvider>,
     );
 
-    const expectedHeaders = ["id", "RequesterEmail", "ProfessorEmail", "Explanation", "DateRequested", "DateNeeded", "Done"];
-    const expectedFields = ["id", "requesterEmail", "professorEmail", "explanation", "dateRequested", "dateNeeded", "done"];
+    const expectedHeaders = [
+      "id",
+      "RequesterEmail",
+      "ProfessorEmail",
+      "Explanation",
+      "DateRequested",
+      "DateNeeded",
+      "Done",
+    ];
+    const expectedFields = [
+      "id",
+      "requesterEmail",
+      "professorEmail",
+      "explanation",
+      "dateRequested",
+      "dateNeeded",
+      "done",
+    ];
     const testId = "RecommendationRequestTable";
 
     expectedHeaders.forEach((headerText) => {
@@ -111,6 +143,32 @@ describe("UserTable tests", () => {
     expect(deleteButton).toHaveClass("btn-danger");
   });
 
+  // had to add a new test to fix mutation coverage for the "done"
+  test("renders results in Done column correctly", () => {
+    const currentUser = currentUserFixtures.userOnly;
+
+    render(
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter>
+          <RecommendationRequestTable
+            requests={recommendationRequestFixtures.threeRequests}
+            currentUser={currentUser}
+          />
+        </MemoryRouter>
+      </QueryClientProvider>,
+    );
+
+    expect(
+      screen.getByTestId("RecommendationRequestTable-cell-row-0-col-done"),
+    ).toHaveTextContent("False");
+    expect(
+      screen.getByTestId("RecommendationRequestTable-cell-row-1-col-done"),
+    ).toHaveTextContent("True");
+    expect(
+      screen.getByTestId("RecommendationRequestTable-cell-row-2-col-done"),
+    ).toHaveTextContent("False");
+  });
+
   test("Edit button navigates to the edit page for admin user", async () => {
     const currentUser = currentUserFixtures.adminUser;
 
@@ -139,7 +197,9 @@ describe("UserTable tests", () => {
     fireEvent.click(editButton);
 
     await waitFor(() =>
-      expect(mockedNavigate).toHaveBeenCalledWith("/recommendationrequest/edit/1"),
+      expect(mockedNavigate).toHaveBeenCalledWith(
+        "/recommendationrequest/edit/1",
+      ),
     );
   });
 

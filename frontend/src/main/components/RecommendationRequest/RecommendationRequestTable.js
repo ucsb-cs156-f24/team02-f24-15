@@ -58,17 +58,34 @@ export default function RecommendationRequestTable({ requests, currentUser }) {
     {
       Header: "Done",
       accessor: "done",
+      Cell: ({ value }) => (value ? "True" : "False"),
     },
   ];
 
   if (hasRole(currentUser, "ROLE_ADMIN")) {
     columns.push(
-      ButtonColumn("Edit", "primary", editCallback, "RecommendationRequestTable"),
+      ButtonColumn(
+        "Edit",
+        "primary",
+        editCallback,
+        "RecommendationRequestTable",
+      ),
     );
     columns.push(
-      ButtonColumn("Delete", "danger", deleteCallback, "RecommendationRequestTable"),
+      ButtonColumn(
+        "Delete",
+        "danger",
+        deleteCallback,
+        "RecommendationRequestTable",
+      ),
     );
   }
 
-  return <OurTable data={requests} columns={columns} testid={"RecommendationRequestTable"} />;
+  return (
+    <OurTable
+      data={requests}
+      columns={columns}
+      testid={"RecommendationRequestTable"}
+    />
+  );
 }
