@@ -25,8 +25,8 @@ function HelpRequestForm({
 
   return (
     <Form onSubmit={handleSubmit(submitAction)}>
-      <Row>
-        {initialContents && (
+      {initialContents && (
+        <Row>
           <Col>
             <Form.Group className="mb-3">
               <Form.Label htmlFor="id">ID</Form.Label>
@@ -40,8 +40,10 @@ function HelpRequestForm({
               />
             </Form.Group>
           </Col>
-        )}
+        </Row>
+      )}
 
+      <Row>
         <Col>
           <Form.Group className="mb-3">
             <Form.Label htmlFor="requesterEmail">Requester Email</Form.Label>
@@ -63,7 +65,9 @@ function HelpRequestForm({
             </Form.Control.Feedback>
           </Form.Group>
         </Col>
+      </Row>
 
+      <Row>
         <Col>
           <Form.Group className="mb-3">
             <Form.Label htmlFor="teamId">Team</Form.Label>
@@ -79,7 +83,9 @@ function HelpRequestForm({
             </Form.Control.Feedback>
           </Form.Group>
         </Col>
+      </Row>
 
+      <Row>
         <Col>
           <Form.Group className="mb-3">
             <Form.Label htmlFor="tableOrBreakoutRoom">
@@ -99,7 +105,9 @@ function HelpRequestForm({
             </Form.Control.Feedback>
           </Form.Group>
         </Col>
+      </Row>
 
+      <Row>
         <Col>
           <Form.Group className="mb-3">
             <Form.Label htmlFor="requestTime">
@@ -123,7 +131,9 @@ function HelpRequestForm({
             </Form.Control.Feedback>
           </Form.Group>
         </Col>
+      </Row>
 
+      <Row>
         <Col>
           <Form.Group className="mb-3">
             <Form.Label htmlFor="explanation">Explanation</Form.Label>
@@ -142,7 +152,9 @@ function HelpRequestForm({
             </Form.Control.Feedback>
           </Form.Group>
         </Col>
+      </Row>
 
+      <Row>
         <Col>
           <Form.Group className="mb-3">
             <Form.Label htmlFor="solved">Solved</Form.Label>
