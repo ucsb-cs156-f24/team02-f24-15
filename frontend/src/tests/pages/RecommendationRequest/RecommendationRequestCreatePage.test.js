@@ -117,7 +117,7 @@ describe("RecommendationRequestCreatePage tests", () => {
       explanation: "this is an explanation",
       dateRequested: "2022-02-02T00:00",
       dateNeeded: "2022-03-02T00:00",
-      done: false,
+      done: "false",
     });
 
     expect(mockToast).toBeCalledWith(
