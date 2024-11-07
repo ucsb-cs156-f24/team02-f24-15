@@ -1,11 +1,11 @@
 import { fireEvent, render, waitFor, screen } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
-import RecommendationRequestIndexPage from "main/pages/RecommendationRequest/RecommendationRequestIndexPage";
+import MenuItemReviewIndexPage from "main/pages/MenuItemReview/MenuItemReviewIndexPage";
 
 import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
 import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
-import { recommendationRequestFixtures } from "fixtures/recommendationRequestFixtures";
+import { menuItemReviewFixtures } from "fixtures/menuItemReviewFixtures";
 import axios from "axios";
 import AxiosMockAdapter from "axios-mock-adapter";
 import mockConsole from "jest-mock-console";
@@ -20,10 +20,10 @@ jest.mock("react-toastify", () => {
   };
 });
 
-describe("RecommendationRequestIndexPage tests", () => {
+describe("MenuItemReviewIndexPage tests", () => {
   const axiosMock = new AxiosMockAdapter(axios);
 
-  const testId = "RecommendationRequestTable";
+  const testId = "MenuItemReviewTable";
 
   const setupUserOnly = () => {
     axiosMock.reset();
@@ -51,41 +51,39 @@ describe("RecommendationRequestIndexPage tests", () => {
     // arrange
     setupAdminUser();
     const queryClient = new QueryClient();
-    axiosMock.onGet("/api/recommendationrequest/all").reply(200, []);
+    axiosMock.onGet("/api/menuitemreview/all").reply(200, []);
 
     // act
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <RecommendationRequestIndexPage />
+          <MenuItemReviewIndexPage />
         </MemoryRouter>
       </QueryClientProvider>,
     );
 
     // assert
     await waitFor(() => {
-      expect(
-        screen.getByText(/Create RecommendationRequest/),
-      ).toBeInTheDocument();
+      expect(screen.getByText(/Create MenuItemReview/)).toBeInTheDocument();
     });
-    const button = screen.getByText(/Create RecommendationRequest/);
-    expect(button).toHaveAttribute("href", "/recommendationrequest/create");
+    const button = screen.getByText(/Create MenuItemReview/);
+    expect(button).toHaveAttribute("href", "/menuitemreview/create");
     expect(button).toHaveAttribute("style", "float: right;");
   });
 
-  test("renders three requests correctly for regular user", async () => {
+  test("renders three reviews correctly for regular user", async () => {
     // arrange
     setupUserOnly();
     const queryClient = new QueryClient();
     axiosMock
-      .onGet("/api/recommendationrequest/all")
-      .reply(200, recommendationRequestFixtures.threeRequests);
+      .onGet("/api/menuitemreview/all")
+      .reply(200, menuItemReviewFixtures.threeReviews);
 
     // act
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <RecommendationRequestIndexPage />
+          <MenuItemReviewIndexPage />
         </MemoryRouter>
       </QueryClientProvider>,
     );
@@ -104,23 +102,21 @@ describe("RecommendationRequestIndexPage tests", () => {
     );
 
     // assert that the Create button is not present when user isn't an admin
-    expect(
-      screen.queryByText(/Create RecommendationRequest/),
-    ).not.toBeInTheDocument();
+    expect(screen.queryByText(/Create MenuItemReview/)).not.toBeInTheDocument();
   });
 
   test("renders empty table when backend unavailable, user only", async () => {
     // arrange
     setupUserOnly();
     const queryClient = new QueryClient();
-    axiosMock.onGet("/api/recommendationrequest/all").timeout();
+    axiosMock.onGet("/api/menuitemreview/all").timeout();
     const restoreConsole = mockConsole();
 
     // act
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <RecommendationRequestIndexPage />
+          <MenuItemReviewIndexPage />
         </MemoryRouter>
       </QueryClientProvider>,
     );
@@ -132,7 +128,7 @@ describe("RecommendationRequestIndexPage tests", () => {
 
     const errorMessage = console.error.mock.calls[0][0];
     expect(errorMessage).toMatch(
-      "Error communicating with backend via GET on /api/recommendationrequest/all",
+      "Error communicating with backend via GET on /api/menuitemreview/all",
     );
     restoreConsole();
 
@@ -146,17 +142,17 @@ describe("RecommendationRequestIndexPage tests", () => {
     setupAdminUser();
     const queryClient = new QueryClient();
     axiosMock
-      .onGet("/api/recommendationrequest/all")
-      .reply(200, recommendationRequestFixtures.threeRequests);
+      .onGet("/api/menuitemreview/all")
+      .reply(200, menuItemReviewFixtures.threeReviews);
     axiosMock
-      .onDelete("/api/recommendationrequest")
-      .reply(200, "RecommendationRequest with id 1 was deleted");
+      .onDelete("/api/menuitemreview")
+      .reply(200, "MenuItemReview with id 1 was deleted");
 
     // act
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <RecommendationRequestIndexPage />
+          <MenuItemReviewIndexPage />
         </MemoryRouter>
       </QueryClientProvider>,
     );
@@ -182,9 +178,7 @@ describe("RecommendationRequestIndexPage tests", () => {
 
     // assert
     await waitFor(() => {
-      expect(mockToast).toBeCalledWith(
-        "RecommendationRequest with id 1 was deleted",
-      );
+      expect(mockToast).toBeCalledWith("MenuItemReview with id 1 was deleted");
     });
   });
 });

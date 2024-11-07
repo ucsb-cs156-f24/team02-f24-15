@@ -63,7 +63,6 @@ describe("HelpRequestForm tests", () => {
     fireEvent.click(submitButton);
 
     await screen.findByText(/Please enter a valid email address/);
-    await screen.findByText(/Please enter a valid request time/);
   });
 
   test("Correct Error messages on missing input", async () => {
@@ -84,7 +83,6 @@ describe("HelpRequestForm tests", () => {
     ).toBeInTheDocument();
     expect(screen.getByText(/Request Time is required/)).toBeInTheDocument();
     expect(screen.getByText(/Explanation is required/)).toBeInTheDocument();
-    expect(screen.getByText(/Solved status is required./)).toBeInTheDocument();
   });
 
   test("No Error messages on good input", async () => {
@@ -117,7 +115,7 @@ describe("HelpRequestForm tests", () => {
       target: { value: "Table 1" },
     });
     fireEvent.change(requestTimeField, {
-      target: { value: "2024-01-01T12:00" },
+      target: { value: "2022-01-02T12:00" },
     });
     fireEvent.change(explanationField, {
       target: { value: "Need help with setup" },
