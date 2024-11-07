@@ -9,7 +9,7 @@ const menuItemReviewFixtures = {
   },
   threeReviews: [
     {
-      id: 2,
+      id: 1,
       itemId: 24,
       reviewerEmail: "amy@ucsb.edu",
       stars: 4,
@@ -17,7 +17,7 @@ const menuItemReviewFixtures = {
       comments: "good",
     },
     {
-      id: 3,
+      id: 2,
       itemId: 28,
       reviewerEmail: "chris@ucsb.edu",
       stars: 1,
@@ -25,7 +25,7 @@ const menuItemReviewFixtures = {
       comments: "terrible",
     },
     {
-      id: 4,
+      id: 3,
       itemId: 32,
       reviewerEmail: "john@ucsb.edu",
       stars: 5,

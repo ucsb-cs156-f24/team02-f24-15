@@ -73,15 +73,15 @@ describe("MenuItemReviewForm tests", () => {
     const commentsField = screen.getByTestId("MenuItemReviewForm-comments");
     const submitButton = screen.getByTestId("MenuItemReviewForm-submit");
 
-    fireEvent.change(itemIdField, { target: { value: 32 } });
+    fireEvent.change(itemIdField, { target: { value: 20 } });
     fireEvent.change(reviewerEmailField, {
       target: { value: "cgaucho@ucsb.edu" },
     });
+    fireEvent.change(starsField, { target: { value: 3 } });
     fireEvent.change(dateReviewedField, {
-      target: { value: "2022-01-04T12:00:00" },
+      target: { value: "2022-01-02T12:00:00" },
     });
-    fireEvent.change(starsField, { target: { value: 1 } });
-    fireEvent.change(commentsField, { target: { value: "good" } });
+    fireEvent.change(commentsField, { target: { value: "okay" } });
     fireEvent.click(submitButton);
 
     await waitFor(() => expect(mockSubmitAction).toHaveBeenCalled());
