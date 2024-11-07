@@ -25,8 +25,8 @@ function HelpRequestForm({
 
   return (
     <Form onSubmit={handleSubmit(submitAction)}>
-      <Row>
-        {initialContents && (
+      {initialContents && (
+        <Row>
           <Col>
             <Form.Group className="mb-3">
               <Form.Label htmlFor="id">ID</Form.Label>
@@ -40,8 +40,10 @@ function HelpRequestForm({
               />
             </Form.Group>
           </Col>
-        )}
+        </Row>
+      )}
 
+      <Row>
         <Col>
           <Form.Group className="mb-3">
             <Form.Label htmlFor="requesterEmail">Requester Email</Form.Label>
@@ -63,7 +65,9 @@ function HelpRequestForm({
             </Form.Control.Feedback>
           </Form.Group>
         </Col>
+      </Row>
 
+      <Row>
         <Col>
           <Form.Group className="mb-3">
             <Form.Label htmlFor="teamId">Team</Form.Label>
@@ -79,7 +83,9 @@ function HelpRequestForm({
             </Form.Control.Feedback>
           </Form.Group>
         </Col>
+      </Row>
 
+      <Row>
         <Col>
           <Form.Group className="mb-3">
             <Form.Label htmlFor="tableOrBreakoutRoom">
@@ -99,7 +105,9 @@ function HelpRequestForm({
             </Form.Control.Feedback>
           </Form.Group>
         </Col>
+      </Row>
 
+      <Row>
         <Col>
           <Form.Group className="mb-3">
             <Form.Label htmlFor="requestTime">
@@ -108,22 +116,21 @@ function HelpRequestForm({
             <Form.Control
               data-testid="HelpRequestForm-requestTime"
               id="requestTime"
-              type="text"
+              type="datetime-local"
               isInvalid={Boolean(errors.requestTime)}
               {...register("requestTime", {
-                required: "Request Time is required",
-                pattern: {
-                  value: isoDate_regex,
-                  message: "Please enter a valid request time.",
-                },
+                required: true,
+                pattern: isoDate_regex,
               })}
             />
             <Form.Control.Feedback type="invalid">
-              {errors.requestTime?.message}
+              {errors.requestTime && "Request Time is required. "}
             </Form.Control.Feedback>
           </Form.Group>
         </Col>
+      </Row>
 
+      <Row>
         <Col>
           <Form.Group className="mb-3">
             <Form.Label htmlFor="explanation">Explanation</Form.Label>
@@ -142,7 +149,9 @@ function HelpRequestForm({
             </Form.Control.Feedback>
           </Form.Group>
         </Col>
+      </Row>
 
+      <Row>
         <Col>
           <Form.Group className="mb-3">
             <Form.Label htmlFor="solved">Solved</Form.Label>
@@ -150,13 +159,8 @@ function HelpRequestForm({
               data-testid="HelpRequestForm-solved"
               id="solved"
               type="checkbox"
-              {...register("solved", {
-                required: "Solved status is required.",
-              })}
+              {...register("solved")}
             />
-            <Form.Control.Feedback type="invalid">
-              {errors.solved?.message}
-            </Form.Control.Feedback>
           </Form.Group>
         </Col>
       </Row>
