@@ -68,7 +68,7 @@ describe("HelpRequestCreatePage tests", () => {
       requesterEmail: "student1@example.com",
       teamId: "team01",
       tableOrBreakoutRoom: "Table 1",
-      requestTime: "2024-10-30T03:58:52.325Z",
+      requestTime: "2022-02-02T00:00",
       explanation: "Need help with project setup",
       solved: false,
     };
@@ -101,7 +101,7 @@ describe("HelpRequestCreatePage tests", () => {
     fireEvent.change(teamIdInput, { target: { value: "team01" } });
     fireEvent.change(roomInput, { target: { value: "Table 1" } });
     fireEvent.change(requestTimeInput, {
-      target: { value: "2024-10-30T03:58:52.325Z" },
+      target: { value: "2022-02-02T00:00" },
     });
     fireEvent.change(explanationInput, {
       target: { value: "Need help with project setup" },
@@ -116,7 +116,7 @@ describe("HelpRequestCreatePage tests", () => {
       requesterEmail: "student1@example.com",
       teamId: "team01",
       tableOrBreakoutRoom: "Table 1",
-      requestTime: "2024-10-30T03:58:52.325Z",
+      requestTime: "2022-02-02T00:00",
       explanation: "Need help with project setup",
       solved: true,
     });

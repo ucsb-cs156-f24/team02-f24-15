@@ -87,7 +87,7 @@ describe("HelpRequestEditPage tests", () => {
         requesterEmail: "student1@example.com",
         teamId: "team01",
         tableOrBreakoutRoom: "Table 1",
-        requestTime: "2024-10-30T03:58:52.325Z",
+        requestTime: "2022-02-02T00:00",
         explanation: "Need help with project setup",
         solved: false,
       });
@@ -96,7 +96,7 @@ describe("HelpRequestEditPage tests", () => {
         requesterEmail: "student1@example.com",
         teamId: "team01",
         tableOrBreakoutRoom: "Table 1",
-        requestTime: "2024-10-30T03:58:52.325Z",
+        requestTime: "2022-02-02T00:00",
         explanation: "Project setup completed",
         solved: true,
       });
@@ -132,7 +132,7 @@ describe("HelpRequestEditPage tests", () => {
       expect(emailField).toHaveValue("student1@example.com");
       expect(teamIdField).toHaveValue("team01");
       expect(roomField).toHaveValue("Table 1");
-      expect(requestTimeField).toHaveValue("2024-10-30T03:58:52.325Z");
+      expect(requestTimeField).toHaveValue("2022-02-02T00:00");
       expect(explanationField).toHaveValue("Need help with project setup");
       expect(solvedCheckbox).not.toBeChecked();
       expect(submitButton).toHaveTextContent("Update");
@@ -174,7 +174,7 @@ describe("HelpRequestEditPage tests", () => {
           requesterEmail: "student1@example.com",
           teamId: "team01",
           tableOrBreakoutRoom: "Table 1",
-          requestTime: "2024-10-30T03:58:52.325Z",
+          requestTime: "2022-02-02T00:00",
           explanation: "Project setup completed",
           solved: true,
         }),
