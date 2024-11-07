@@ -70,7 +70,7 @@ export default function AppNavbar({
                     Placeholder
                   </Nav.Link>
                   <Nav.Link as={Link} to="/diningmenucommonsitem">
-                    UCSBDiningCommonsMenuItem 
+                    UCSBDiningCommonsMenuItem
                   </Nav.Link>
                 </>
               ) : (
