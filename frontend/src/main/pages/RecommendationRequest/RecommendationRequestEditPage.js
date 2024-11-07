@@ -42,7 +42,9 @@ export default function RecommendationRequestEditPage({ storybook = false }) {
   });
 
   const onSuccess = (recommendationRequest) => {
-    toast(`RecommendationRequest Updated - id: ${recommendationRequeste.id} requesterEmail: ${recommendationRequest.requesterEmail}`);
+    toast(
+      `RecommendationRequest Updated - id: ${recommendationRequest.id} requesterEmail: ${recommendationRequest.requesterEmail}`,
+    );
   };
 
   const mutation = useBackendMutation(
