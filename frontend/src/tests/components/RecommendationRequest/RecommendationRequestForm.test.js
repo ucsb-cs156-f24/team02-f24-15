@@ -134,7 +134,7 @@ describe("RecommendationRequestForm tests", () => {
       screen.queryByText(/dateRequested must be in ISO format/),
     ).not.toBeInTheDocument();
     expect(
-      screen.queryByText(/dateRequested must be in ISO format/),
+      screen.queryByText(/dateNeeded must be in ISO format/),
     ).not.toBeInTheDocument();
   });
 
