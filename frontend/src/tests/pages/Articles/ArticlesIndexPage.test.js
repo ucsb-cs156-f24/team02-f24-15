@@ -10,7 +10,6 @@ import axios from "axios";
 import AxiosMockAdapter from "axios-mock-adapter";
 import mockConsole from "jest-mock-console";
 
-
 const mockToast = jest.fn();
 jest.mock("react-toastify", () => {
   const originalModule = jest.requireActual("react-toastify");
@@ -68,7 +67,7 @@ describe("ArticlesIndexPage tests", () => {
       expect(screen.getByText(/Create Article/)).toBeInTheDocument();
     });
     const button = screen.getByText(/Create Article/);
-    expect(button).toHaveAttribute("href", "/Article/create");
+    expect(button).toHaveAttribute("href", "/Articles/create");
     expect(button).toHaveAttribute("style", "float: right;");
   });
 
