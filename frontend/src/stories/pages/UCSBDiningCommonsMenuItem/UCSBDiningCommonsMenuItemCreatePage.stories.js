@@ -1,9 +1,8 @@
 import React from "react";
+import UCSBDiningCommonsMenuItemCreatePage from "main/pages/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemCreatePage";
 import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
 import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
 import { http, HttpResponse } from "msw";
-
-import UCSBDiningCommonsMenuItemCreatePage from "main/pages/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemCreatePage";
 
 export default {
   title: "pages/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemCreatePage",
@@ -25,7 +24,7 @@ Default.parameters = {
         status: 200,
       });
     }),
-    http.post("/api/ucsbdiningcommonsmenuitem/post", () => {
+    http.post("/api/ucsbdiningcommonmenuitem/post", () => {
       return HttpResponse.json({}, { status: 200 });
     }),
   ],
