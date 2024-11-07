@@ -12,8 +12,9 @@ export default {
 
 const Template = () => <UCSBDiningCommonsMenuItemEditPage storybook={true} />;
 
-export const Default = Template.bind({});
-Default.parameters = {
+// Updated story name to be unique
+export const AdminEdit = Template.bind({});
+AdminEdit.parameters = {
   msw: [
     http.get("/api/currentUser", () => {
       return HttpResponse.json(apiCurrentUserFixtures.userOnly, {

@@ -1,19 +1,18 @@
 import React from "react";
+import UCSBDiningCommonsMenuItemIndexPage from "main/pages/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemIndexPage";
 import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
 import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
 import { http, HttpResponse } from "msw";
 
-import UCSBDiningCommonsMenuItemEditPage from "main/pages/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemEditPage";
-
 export default {
-  title: "pages/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemEditPage",
-  component: UCSBDiningCommonsMenuItemEditPage,
+  title: "pages/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemIndexPage",
+  component: UCSBDiningCommonsMenuItemIndexPage,
 };
 
-const Template = () => <UCSBDiningCommonsMenuItemEditPage storybook={true} />;
+const Template = () => <UCSBDiningCommonsMenuItemIndexPage storybook={true} />;
 
-export const Default = Template.bind({});
-Default.parameters = {
+export const DefaultIndex = Template.bind({});
+DefaultIndex.parameters = {
   msw: [
     http.get("/api/currentUser", () => {
       return HttpResponse.json(apiCurrentUserFixtures.userOnly, {
@@ -25,8 +24,8 @@ Default.parameters = {
         status: 200,
       });
     }),
-    http.put("/api/ucsbdiningcommonsmenuitem/put", () => {
-      return HttpResponse.json({}, { status: 200 });
+    http.get("/api/ucsbdiningcommonsmenuitem/all", () => {
+      return HttpResponse.json([], { status: 200 });
     }),
   ],
 };
