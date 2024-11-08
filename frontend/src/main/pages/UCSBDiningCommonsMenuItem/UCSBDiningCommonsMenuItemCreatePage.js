@@ -4,7 +4,9 @@ import { Navigate } from "react-router-dom";
 import { useBackendMutation } from "main/utils/useBackend";
 import { toast } from "react-toastify";
 
-function UCSBDiningCommonsMenuItemCreatePage({ storybook = false }) {
+export default function UCSBDiningCommonsMenuItemCreatePage({
+  storybook = false,
+}) {
   const objectToAxiosParams = (item) => ({
     url: "/api/ucsbdiningcommonmenuitem/post",
     method: "POST",
@@ -15,20 +17,28 @@ function UCSBDiningCommonsMenuItemCreatePage({ storybook = false }) {
     },
   });
 
-  const onSuccess = (data) => {
-    console.log("Server response data:", data); // Debugging line
-    toast(`New UCSBDiningCommonsMenuItem Created - id: ${data.id} name: ${data.name}`);
-    if (!storybook) {
-      return <Navigate to="/diningcommonsmenuitem" />;
-    }
+  const onSuccess = (item) => {
+    toast(
+      `New UCSBDiningCommonsMenuItem Created - id: ${item.id} name: ${item.name}`,
+    );
   };
-  
 
-  const mutation = useBackendMutation(objectToAxiosParams, { onSuccess });
+  // Stryker disable next-line ArrayDeclaration
+  const mutation = useBackendMutation(objectToAxiosParams, { onSuccess }, [
+    // Stryker disable next-line StringLiteral
+    "/api/ucsbdiningcommonmenuitem/all",
+  ]);
+  // Stryker restore
 
-  const onSubmit = (data) => {
+  const { isSuccess } = mutation;
+
+  const onSubmit = async (data) => {
     mutation.mutate(data);
   };
+
+  if (isSuccess && !storybook) {
+    return <Navigate to="/diningcommonsmenuitem" />;
+  }
 
   return (
     <BasicLayout>
@@ -39,5 +49,3 @@ function UCSBDiningCommonsMenuItemCreatePage({ storybook = false }) {
     </BasicLayout>
   );
 }
-
-export default UCSBDiningCommonsMenuItemCreatePage;

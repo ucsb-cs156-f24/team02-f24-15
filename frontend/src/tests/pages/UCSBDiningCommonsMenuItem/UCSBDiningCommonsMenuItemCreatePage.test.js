@@ -2,8 +2,10 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import UCSBDiningCommonsMenuItemCreatePage from "main/pages/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemCreatePage";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
+
 import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
 import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
+
 import axios from "axios";
 import AxiosMockAdapter from "axios-mock-adapter";
 
@@ -11,6 +13,7 @@ const mockToast = jest.fn();
 jest.mock("react-toastify", () => {
   const originalModule = jest.requireActual("react-toastify");
   return {
+    __esModule: true,
     ...originalModule,
     toast: (x) => mockToast(x),
   };
@@ -20,6 +23,7 @@ const mockNavigate = jest.fn();
 jest.mock("react-router-dom", () => {
   const originalModule = jest.requireActual("react-router-dom");
   return {
+    __esModule: true,
     ...originalModule,
     Navigate: (x) => {
       mockNavigate(x);
@@ -59,6 +63,7 @@ describe("UCSBDiningCommonsMenuItemCreatePage tests", () => {
   });
 
   test("on submit, makes request to backend, and redirects to /diningcommonsmenuitem", async () => {
+    const queryClient = new QueryClient();
     const menuItem = {
       id: 3,
       diningCommonsCode: "DCS",
@@ -80,18 +85,32 @@ describe("UCSBDiningCommonsMenuItemCreatePage tests", () => {
       expect(screen.getByLabelText("Dining Commons Code")).toBeInTheDocument();
     });
 
-    fireEvent.change(screen.getByLabelText("Dining Commons Code"), { target: { value: "DCS" } });
-    fireEvent.change(screen.getByLabelText("Name"), { target: { value: "Grilled Cheese" } });
-    fireEvent.change(screen.getByLabelText("Station"), { target: { value: "Hot Station" } });
-    fireEvent.click(screen.getByText("Create"));
+    const codeInput = screen.getByLabelText("Dining Commons Code");
+    expect(codeInput).toBeInTheDocument();
+
+    const nameInput = screen.getByLabelText("Name");
+    expect(nameInput).toBeInTheDocument();
+
+    const stationInput = screen.getByLabelText("Station");
+    expect(stationInput).toBeInTheDocument();
+
+    const createButton = screen.getByText("Create");
+    expect(createButton).toBeInTheDocument();
+
+    fireEvent.change(codeInput, { target: { value: "DCS" } });
+    fireEvent.change(nameInput, { target: { value: "Grilled Cheese" } });
+    fireEvent.change(stationInput, { target: { value: "Hot Station" } });
+    fireEvent.click(createButton);
 
     await waitFor(() => expect(axiosMock.history.post.length).toBe(1));
+
     expect(axiosMock.history.post[0].params).toEqual({
       diningCommonsCode: "DCS",
       name: "Grilled Cheese",
       station: "Hot Station",
     });
 
+    // Assert - check that the toast was called with the expected message
     expect(mockToast).toBeCalledWith(
       "New UCSBDiningCommonsMenuItem Created - id: 3 name: Grilled Cheese",
     );
