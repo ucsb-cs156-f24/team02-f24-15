@@ -4,6 +4,7 @@ import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
 import { http, HttpResponse } from "msw";
 
 import UCSBDiningCommonsMenuItemEditPage from "main/pages/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemEditPage";
+import { ucsbDiningCommonsMenuItemFixtures } from "fixtures/ucsbDiningCommonsMenuItemFixtures";
 
 export default {
   title: "pages/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemEditPage",
@@ -12,9 +13,8 @@ export default {
 
 const Template = () => <UCSBDiningCommonsMenuItemEditPage storybook={true} />;
 
-// Updated story name to be unique
-export const AdminEdit = Template.bind({});
-AdminEdit.parameters = {
+export const Default = Template.bind({});
+Default.parameters = {
   msw: [
     http.get("/api/currentUser", () => {
       return HttpResponse.json(apiCurrentUserFixtures.userOnly, {
@@ -26,7 +26,19 @@ AdminEdit.parameters = {
         status: 200,
       });
     }),
-    http.put("/api/ucsbdiningcommonsmenuitem/put", () => {
+    http.get("/api/ucsbdiningcommonmenuitem", () => {
+      return HttpResponse.json(
+        ucsbDiningCommonsMenuItemFixtures.threeItems[0],
+        {
+          status: 200,
+        },
+      );
+    }),
+    http.put("/api/ucsbdiningcommonmenuitem", () => {
+      return HttpResponse.json({}, { status: 200 });
+    }),
+    http.put("/api/ucsbdiningcommonmenuitem", (req) => {
+      window.alert("PUT: " + req.url + " and body: " + req.body);
       return HttpResponse.json({}, { status: 200 });
     }),
   ],
