@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for pages/Articles/ArticlesCreatePage.js</title>
+    <title>Code coverage report for pages/MenuItemReview/MenuItemReviewCreatePage.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,7 +19,7 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">pages/Articles</a> ArticlesCreatePage.js</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">pages/MenuItemReview</a> MenuItemReviewCreatePage.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
@@ -113,7 +113,9 @@
 <a name='L48'></a><a href='#L48'>48</a>
 <a name='L49'></a><a href='#L49'>49</a>
 <a name='L50'></a><a href='#L50'>50</a>
-<a name='L51'></a><a href='#L51'>51</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -134,6 +136,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
@@ -164,33 +168,35 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import BasicLayout from "main/layouts/BasicLayout/BasicLayout";
-import ArticlesForm from "main/components/Articles/ArticlesForm";
+import MenuItemReviewForm from "main/components/MenuItemReview/MenuItemReviewForm";
 import { Navigate } from "react-router-dom";
 import { useBackendMutation } from "main/utils/useBackend";
 import { toast } from "react-toastify";
 &nbsp;
-export default function ArticlesCreatePage({ storybook = false }) {
-  const objectToAxiosParams = (article) =&gt; ({
-    url: "/api/Articles/post",
+export default function MenuItemReviewCreatePage({ storybook = false }) {
+  const objectToAxiosParams = (menuItemReview) =&gt; ({
+    url: "/api/menuitemreview/post",
     method: "POST",
     params: {
-      title: article.title,
-      url: article.url,
-      explanation: article.explanation,
-      email: article.email,
-      dateAdded: article.dateAdded,
+      itemId: menuItemReview.itemId,
+      reviewerEmail: menuItemReview.reviewerEmail,
+      stars: menuItemReview.stars,
+      dateReviewed: menuItemReview.dateReviewed,
+      comments: menuItemReview.comments,
     },
   });
 &nbsp;
-  const onSuccess = (article) =&gt; {
-    toast(`New article Created - id: ${article.id} title: ${article.title}`);
+  const onSuccess = (menuItemReview) =&gt; {
+    toast(
+      `New menuItemReview Created - id: ${menuItemReview.id} itemId: ${menuItemReview.itemId}`,
+    );
   };
 &nbsp;
   const mutation = useBackendMutation(
     objectToAxiosParams,
     { onSuccess },
     // Stryker disable next-line all : hard to set up test for caching
-    ["/api/Articles/all"],
+    ["/api/menuitemreview/all"],
   );
 &nbsp;
   const { isSuccess } = mutation;
@@ -200,15 +206,15 @@ export default function ArticlesCreatePage({ storybook = false }) {
   };
 &nbsp;
   if (isSuccess &amp;&amp; !storybook) {
-    return &lt;Navigate to="/Articles" /&gt;;
+    return &lt;Navigate to="/menuitemreview" /&gt;;
   }
 &nbsp;
   return (
     &lt;BasicLayout&gt;
       &lt;div className="pt-2"&gt;
-        &lt;h1&gt;Create New Article&lt;/h1&gt;
+        &lt;h1&gt;Create New MenuItemReview&lt;/h1&gt;
 &nbsp;
-        &lt;ArticlesForm submitAction={onSubmit} /&gt;
+        &lt;MenuItemReviewForm submitAction={onSubmit} /&gt;
       &lt;/div&gt;
     &lt;/BasicLayout&gt;
   );
