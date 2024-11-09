@@ -2,7 +2,9 @@ import { toast } from "react-toastify";
 
 export function onDeleteSuccess(message) {
   console.log(message);
-  toast(message);
+  const successMessage =
+    typeof message === "string" ? message : message.message;
+  toast.success(successMessage);
 }
 
 export function rowToAxiosParamsDelete(row) {
