@@ -2,6 +2,9 @@ import { useTable, useSortBy } from "react-table";
 import { Table, Button } from "react-bootstrap";
 
 export default function OurTable({ columns, data, testid = "testid" }) {
+  console.log('Columns:', columns);
+  console.log('Data:', data);
+  
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data }, useSortBy);
 
