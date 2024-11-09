@@ -27,23 +27,23 @@ export default function UCSBDiningCommonsMenuItemEditPage({
     },
   );
 
-  const objectToAxiosPutParams = (diningcommonsmenuitem) => ({
+  const objectToAxiosPutParams = (menuItems) => ({
     url: "/api/ucsbdiningcommonsmenuitem",
     method: "PUT",
     params: {
-      id: diningcommonsmenuitem.id,
+      id: menuItems.id,
     },
     data: {
-      id: diningcommonsmenuitem.id,
-      diningCommonsCode: diningcommonsmenuitem.diningCommonsCode,
-      name: diningcommonsmenuitem.name,
-      station: diningcommonsmenuitem.station,
+      id: menuItems.id,
+      diningCommonsCode: menuItems.diningCommonsCode,
+      name: menuItems.name,
+      station: menuItems.station,
     },
   });
 
-  const onSuccess = (diningcommonsmenuitem) => {
+  const onSuccess = (menuItems) => {
     toast(
-      `DiningCommonsMenuItem Updated - id: ${diningcommonsmenuitem.id} name: ${diningcommonsmenuitem.name}`,
+      `DiningCommonsMenuItem Updated - id: ${menuItems.id} name: ${menuItems.name}`,
     );
   };
 
@@ -68,9 +68,9 @@ export default function UCSBDiningCommonsMenuItemEditPage({
     <BasicLayout>
       <div className="pt-2">
         <h1>Edit DiningCommonsMenuItem</h1>
-        {diningcommonsmenuitem && (
+        {menuItems && (
           <UCSBDiningCommonsMenuItemForm
-            initialContents={diningcommonsmenuitem}
+            initialContents={menuItems}
             submitAction={onSubmit}
             buttonLabel={"Update"}
           />
