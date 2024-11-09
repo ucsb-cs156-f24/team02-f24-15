@@ -1,11 +1,9 @@
-// src/main/components/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemTable.js
-
 import React from "react";
-import OurTable from "main/components/OurTable";
-import { Button } from "react-bootstrap";
+import OurTable, { ButtonColumn } from "main/components/OurTable";
+
 import { useBackendMutation } from "main/utils/useBackend";
 import {
-  rowToAxiosParamsDelete,
+  cellToAxiosParamsDelete,
   onDeleteSuccess,
 } from "main/utils/UCSBDiningCommonsMenuItemUtils";
 import { useNavigate } from "react-router-dom";
@@ -18,36 +16,19 @@ export default function UCSBDiningCommonsMenuItemTable({
 }) {
   const navigate = useNavigate();
 
-  const editCallback = (row) => {
-    navigate(`/menuitem/edit/${row.id}`);
+  const editCallback = (cell) => {
+    navigate(`/ucsbdiningcommonsmenuitem/edit/${cell.row.values.id}`);
   };
 
   const deleteMutation = useBackendMutation(
-    rowToAxiosParamsDelete,
+    cellToAxiosParamsDelete,
     { onSuccess: onDeleteSuccess }, // Needs test
     ["/api/ucsbdiningcommonsmenuitem/all"], // Needs test
   );
 
-  const deleteCallback = async (row) => {
-    deleteMutation.mutate(row);
+  const deleteCallback = async (cell) => {
+    deleteMutation.mutate(cell);
   };
-
-  function ButtonColumn(label, variant, callback, testid) {
-    return {
-      Header: label,
-      id: label,
-      accessor: (row) => row, // Return the entire row
-      Cell: ({ cell }) => (
-        <Button
-          variant={variant}
-          onClick={() => callback(cell.value)} // Use cell.value
-          data-testid={`${testid}-cell-row-${cell.row.index}-col-${cell.column.id}-button`}
-        >
-          {label}
-        </Button>
-      ),
-    };
-  }
 
   const columns = [
     {

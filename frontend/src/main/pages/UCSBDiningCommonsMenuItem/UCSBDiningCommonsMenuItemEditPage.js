@@ -11,7 +11,7 @@ export default function UCSBDiningCommonsMenuItemEditPage({
   let { id } = useParams();
 
   const {
-    data: diningcommonsmenuitem,
+    data: menuItems,
     _error,
     _status,
   } = useBackend(

@@ -7,12 +7,12 @@ export function onDeleteSuccess(message) {
   toast.success(successMessage);
 }
 
-export function rowToAxiosParamsDelete(row) {
+export function cellToAxiosParamsDelete(cell) {
   return {
     url: "/api/ucsbdiningcommonsmenuitem",
     method: "DELETE",
     params: {
-      id: row.id,
+      id: cell.row.values.id,
     },
   };
 }
