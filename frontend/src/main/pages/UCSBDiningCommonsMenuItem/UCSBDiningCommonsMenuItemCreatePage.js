@@ -7,19 +7,19 @@ import { toast } from "react-toastify";
 export default function UCSBDiningCommonsMenuItemCreatePage({
   storybook = false,
 }) {
-  const objectToAxiosParams = (item) => ({
+  const objectToAxiosParams = (menuItems) => ({
     url: "/api/ucsbdiningcommonsmenuitem/post",
     method: "POST",
     params: {
-      diningCommonsCode: item.diningCommonsCode,
-      name: item.name,
-      station: item.station,
+      diningCommonsCode: menuItems.diningCommonsCode,
+      name: menuItems.name,
+      station: menuItems.station,
     },
   });
 
-  const onSuccess = (item) => {
+  const onSuccess = (menuItems) => {
     toast(
-      `New UCSBDiningCommonsMenuItem Created - id: ${item.id} name: ${item.name}`,
+      `New UCSBDiningCommonsMenuItem Created - id: ${menuItems.id} name: ${menuItems.name}`,
     );
   };
 
@@ -43,7 +43,7 @@ export default function UCSBDiningCommonsMenuItemCreatePage({
   return (
     <BasicLayout>
       <div className="pt-2">
-        <h1>Create New UCSB Dining Commons Menu Item</h1>
+        <h1>Create UCSBDiningCommonsMenuItems</h1>
         <UCSBDiningCommonsMenuItemForm submitAction={onSubmit} />
       </div>
     </BasicLayout>

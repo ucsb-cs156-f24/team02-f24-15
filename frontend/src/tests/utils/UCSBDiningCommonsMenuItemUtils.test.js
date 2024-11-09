@@ -1,6 +1,6 @@
 import {
   onDeleteSuccess,
-  rowToAxiosParamsDelete,
+  cellToAxiosParamsDelete,
 } from "main/utils/UCSBDiningCommonsMenuItemUtils";
 import mockConsole from "jest-mock-console";
 import { toast } from "react-toastify";
@@ -38,13 +38,13 @@ describe("UCSBDiningCommonsMenuItemUtils", () => {
     });
   });
 
-  describe("rowToAxiosParamsDelete", () => {
+  describe("cellToAxiosParamsDelete", () => {
     test("It returns the correct params", () => {
       // Arrange
-      const row = { id: 2 };
+      const cell = { row: { values: { id: 2 } } };
 
       // Act
-      const result = rowToAxiosParamsDelete(row);
+      const result = cellToAxiosParamsDelete(cell);
 
       // Assert
       expect(result).toEqual({
