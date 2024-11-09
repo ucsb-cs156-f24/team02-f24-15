@@ -54,4 +54,21 @@ describe("UCSBDiningCommonsMenuItemUtils", () => {
       });
     });
   });
+
+  test("It handles non-string messages (object with message property)", () => {
+    // Arrange
+    const restoreConsole = mockConsole();
+    const messageObject = { message: "Menu item deleted successfully" };
+
+    // Act
+    onDeleteSuccess(messageObject);
+
+    // Assert
+    expect(toast.success).toHaveBeenCalledWith(
+      "Menu item deleted successfully",
+    );
+    expect(console.log).toHaveBeenCalledWith(messageObject);
+
+    restoreConsole();
+  });
 });
