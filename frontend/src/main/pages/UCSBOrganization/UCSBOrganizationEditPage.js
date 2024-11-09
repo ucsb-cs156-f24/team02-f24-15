@@ -40,9 +40,7 @@ export default function UCSBOrganizationEditPage({ storybook = false }) {
   });
 
   const onSuccess = (organization) => {
-    toast(
-      `UCSB Organization Updated - orgCode: ${organization.orgCode}`,
-    );
+    toast(`UCSB Organization Updated - orgCode: ${organization.orgCode}`);
   };
 
   const mutation = useBackendMutation(

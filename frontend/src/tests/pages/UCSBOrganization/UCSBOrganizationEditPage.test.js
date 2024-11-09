@@ -135,9 +135,7 @@ describe("UCSBOrganizationEditPage tests", () => {
 
       expect(orgCodeField).toHaveValue("CSB");
       expect(orgTranslationShortField).toHaveValue("Coders SB");
-      expect(orgTranslationField).toHaveValue(
-        "Coders SB Programming Club",
-      );
+      expect(orgTranslationField).toHaveValue("Coders SB Programming Club");
       expect(inactiveField).toHaveValue("false");
       expect(submitButton).toHaveTextContent("Update");
     });
