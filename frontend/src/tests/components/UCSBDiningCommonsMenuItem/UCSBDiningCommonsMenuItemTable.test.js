@@ -29,9 +29,12 @@ describe("UCSBDiningCommonsMenuItemTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <UCSBDiningCommonsMenuItemTable menuItems={[]} currentUser={currentUser} />
+          <UCSBDiningCommonsMenuItemTable
+            menuItems={[]}
+            currentUser={currentUser}
+          />
         </MemoryRouter>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
     // assert
@@ -41,7 +44,9 @@ describe("UCSBDiningCommonsMenuItemTable tests", () => {
     });
 
     expectedFields.forEach((field) => {
-      const fieldElement = screen.queryByTestId(`${testId}-cell-row-0-col-${field}`);
+      const fieldElement = screen.queryByTestId(
+        `${testId}-cell-row-0-col-${field}`,
+      );
       expect(fieldElement).not.toBeInTheDocument();
     });
   });
@@ -59,7 +64,7 @@ describe("UCSBDiningCommonsMenuItemTable tests", () => {
             currentUser={currentUser}
           />
         </MemoryRouter>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
     // assert
@@ -73,17 +78,29 @@ describe("UCSBDiningCommonsMenuItemTable tests", () => {
       expect(cell).toBeInTheDocument();
     });
 
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("2");
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-name`)).toHaveTextContent("Pasta");
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent(
+      "2",
+    );
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-name`),
+    ).toHaveTextContent("Pasta");
 
-    expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("3");
-    expect(screen.getByTestId(`${testId}-cell-row-1-col-name`)).toHaveTextContent("Tacos");
+    expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent(
+      "3",
+    );
+    expect(
+      screen.getByTestId(`${testId}-cell-row-1-col-name`),
+    ).toHaveTextContent("Tacos");
 
-    const editButton = screen.getByTestId(`${testId}-cell-row-0-col-Edit-button`);
+    const editButton = screen.getByTestId(
+      `${testId}-cell-row-0-col-Edit-button`,
+    );
     expect(editButton).toBeInTheDocument();
     expect(editButton).toHaveClass("btn-primary");
 
-    const deleteButton = screen.getByTestId(`${testId}-cell-row-0-col-Delete-button`);
+    const deleteButton = screen.getByTestId(
+      `${testId}-cell-row-0-col-Delete-button`,
+    );
     expect(deleteButton).toBeInTheDocument();
     expect(deleteButton).toHaveClass("btn-danger");
   });
@@ -101,7 +118,7 @@ describe("UCSBDiningCommonsMenuItemTable tests", () => {
             currentUser={currentUser}
           />
         </MemoryRouter>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
     // assert
@@ -115,11 +132,19 @@ describe("UCSBDiningCommonsMenuItemTable tests", () => {
       expect(cell).toBeInTheDocument();
     });
 
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("2");
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-name`)).toHaveTextContent("Pasta");
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent(
+      "2",
+    );
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-name`),
+    ).toHaveTextContent("Pasta");
 
-    expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("3");
-    expect(screen.getByTestId(`${testId}-cell-row-1-col-name`)).toHaveTextContent("Tacos");
+    expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent(
+      "3",
+    );
+    expect(
+      screen.getByTestId(`${testId}-cell-row-1-col-name`),
+    ).toHaveTextContent("Tacos");
 
     expect(screen.queryByText("Delete")).not.toBeInTheDocument();
     expect(screen.queryByText("Edit")).not.toBeInTheDocument();
@@ -138,14 +163,20 @@ describe("UCSBDiningCommonsMenuItemTable tests", () => {
             currentUser={currentUser}
           />
         </MemoryRouter>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
     // assert - check that the expected content is rendered
-    expect(await screen.findByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("2");
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-name`)).toHaveTextContent("Pasta");
+    expect(
+      await screen.findByTestId(`${testId}-cell-row-0-col-id`),
+    ).toHaveTextContent("2");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-name`),
+    ).toHaveTextContent("Pasta");
 
-    const editButton = screen.getByTestId(`${testId}-cell-row-0-col-Edit-button`);
+    const editButton = screen.getByTestId(
+      `${testId}-cell-row-0-col-Edit-button`,
+    );
     expect(editButton).toBeInTheDocument();
 
     // act - click the edit button
@@ -153,7 +184,9 @@ describe("UCSBDiningCommonsMenuItemTable tests", () => {
 
     // assert - check that the navigate function was called with the expected path
     await waitFor(() =>
-      expect(mockedNavigate).toHaveBeenCalledWith("/ucsbdiningcommonsmenuitem/edit/2")
+      expect(mockedNavigate).toHaveBeenCalledWith(
+        "/ucsbdiningcommonsmenuitem/edit/2",
+      ),
     );
   });
 
@@ -175,14 +208,20 @@ describe("UCSBDiningCommonsMenuItemTable tests", () => {
             currentUser={currentUser}
           />
         </MemoryRouter>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
     // assert - check that the expected content is rendered
-    expect(await screen.findByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("2");
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-name`)).toHaveTextContent("Pasta");
+    expect(
+      await screen.findByTestId(`${testId}-cell-row-0-col-id`),
+    ).toHaveTextContent("2");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-name`),
+    ).toHaveTextContent("Pasta");
 
-    const deleteButton = screen.getByTestId(`${testId}-cell-row-0-col-Delete-button`);
+    const deleteButton = screen.getByTestId(
+      `${testId}-cell-row-0-col-Delete-button`,
+    );
     expect(deleteButton).toBeInTheDocument();
 
     // act - click the delete button

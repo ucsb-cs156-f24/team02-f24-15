@@ -23,7 +23,6 @@ jest.mock("react-toastify", () => {
   };
 });
 
-
 describe("UCSBDiningCommonsMenuItemIndexPage tests", () => {
   const axiosMock = new AxiosMockAdapter(axios);
 
@@ -70,9 +69,7 @@ describe("UCSBDiningCommonsMenuItemIndexPage tests", () => {
         screen.getByText(/Create UCSBDiningCommonsMenuItem/),
       ).toBeInTheDocument();
     });
-    const createButton = screen.getByText(
-      /Create UCSBDiningCommonsMenuItem/,
-    );
+    const createButton = screen.getByText(/Create UCSBDiningCommonsMenuItem/);
     expect(createButton).toHaveAttribute(
       "href",
       "/ucsbdiningcommonsmenuitem/create",
@@ -185,8 +182,31 @@ describe("UCSBDiningCommonsMenuItemIndexPage tests", () => {
     await waitFor(() => {
       expect(axiosMock.history.delete.length).toBe(1);
     });
-    expect(axiosMock.history.delete[0].url).toBe("/api/ucsbdiningcommonsmenuitem");
-    expect(axiosMock.history.delete[0].url).toBe("/api/ucsbdiningcommonsmenuitem");
+    expect(axiosMock.history.delete[0].url).toBe(
+      "/api/ucsbdiningcommonsmenuitem",
+    );
+    expect(axiosMock.history.delete[0].url).toBe(
+      "/api/ucsbdiningcommonsmenuitem",
+    );
     expect(axiosMock.history.delete[0].params).toEqual({ id: 2 });
+  });
+
+  test("does not render Create Button when user does not have admin role", async () => {
+    setupUserOnly(); // Setting up as a regular user without admin role
+    axiosMock.onGet("/api/ucsbdiningcommonsmenuitem/all").reply(200, []);
+
+    render(
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter>
+          <UCSBDiningCommonsMenuItemIndexPage />
+        </MemoryRouter>
+      </QueryClientProvider>,
+    );
+
+    await waitFor(() => {
+      expect(
+        screen.queryByText(/Create UCSBDiningCommonsMenuItem/),
+      ).not.toBeInTheDocument();
+    });
   });
 });
