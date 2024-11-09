@@ -26,7 +26,7 @@ Empty.parameters = {
         status: 200,
       });
     }),
-    http.get("/api/ucsbdiningcommonsmenuitem/all", () => {
+    http.get("/api/ucsbdiningcommonmenuitem/all", () => {
       return HttpResponse.json([], { status: 200 });
     }),
   ],
@@ -41,7 +41,7 @@ ThreeItemsOrdinaryUser.parameters = {
     http.get("/api/systemInfo", () => {
       return HttpResponse.json(systemInfoFixtures.showingNeither);
     }),
-    http.get("/api/ucsbdiningcommonsmenuitem/all", () => {
+    http.get("/api/ucsbdiningcommonmenuitem/all", () => {
       return HttpResponse.json(ucsbDiningCommonsMenuItemFixtures.threeItems);
     }),
   ],
@@ -56,10 +56,10 @@ ThreeItemsAdminUser.parameters = {
     http.get("/api/systemInfo", () => {
       return HttpResponse.json(systemInfoFixtures.showingNeither);
     }),
-    http.get("/api/ucsbdiningcommonsmenuitem/all", () => {
+    http.get("/api/ucsbdiningcommonmenuitem/all", () => {
       return HttpResponse.json(ucsbDiningCommonsMenuItemFixtures.threeItems);
     }),
-    http.delete("/api/ucsbdiningcommonsmenuitem", () => {
+    http.delete("/api/ucsbdiningcommonmenuitem", () => {
       return HttpResponse.json(
         { message: "UCSB Dining Commons Menu Item deleted successfully" },
         { status: 200 },

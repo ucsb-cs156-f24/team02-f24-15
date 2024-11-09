@@ -49,7 +49,7 @@ describe("UCSBDiningCommonsMenuItemIndexPage tests", () => {
   test("Renders with Create Button for admin user", async () => {
     const queryClient = new QueryClient();
     setupAdminUser();
-    axiosMock.onGet("/api/ucsbdiningcommonsmenuitem/all").reply(200, []);
+    axiosMock.onGet("/api/ucsbdiningcommonmenuitem/all").reply(200, []);
 
     render(
       <QueryClientProvider client={queryClient}>
@@ -69,7 +69,7 @@ describe("UCSBDiningCommonsMenuItemIndexPage tests", () => {
     );
     expect(createButton).toHaveAttribute(
       "href",
-      "/ucsbdiningcommonsmenuitem/create",
+      "/ucsbdiningcommonmenuitem/create",
     );
     expect(createButton).toHaveAttribute("style", "float: right;");
   });
@@ -78,7 +78,7 @@ describe("UCSBDiningCommonsMenuItemIndexPage tests", () => {
     const queryClient = new QueryClient();
     setupUserOnly();
     axiosMock
-      .onGet("/api/ucsbdiningcommonsmenuitem/all")
+      .onGet("/api/ucsbdiningcommonmenuitem/all")
       .reply(200, ucsbDiningCommonsMenuItemFixtures.threeItems);
 
     render(
@@ -119,7 +119,7 @@ describe("UCSBDiningCommonsMenuItemIndexPage tests", () => {
     const restoreConsole = mockConsole();
 
     axiosMock
-      .onGet("/api/ucsbdiningcommonsmenuitem/all")
+      .onGet("/api/ucsbdiningcommonmenuitem/all")
       .reply(404, { message: "Not Found" });
 
     render(
@@ -142,7 +142,7 @@ describe("UCSBDiningCommonsMenuItemIndexPage tests", () => {
 
     const errorMessage = console.error.mock.calls[0][0];
     expect(errorMessage).toMatch(
-      "Error communicating with backend via GET on /api/ucsbdiningcommonsmenuitem/all",
+      "Error communicating with backend via GET on /api/ucsbdiningcommonmenuitem/all",
     );
 
     restoreConsole();
@@ -153,10 +153,10 @@ describe("UCSBDiningCommonsMenuItemIndexPage tests", () => {
     setupAdminUser();
 
     axiosMock
-      .onGet("/api/ucsbdiningcommonsmenuitem/all")
+      .onGet("/api/ucsbdiningcommonmenuitem/all")
       .reply(200, ucsbDiningCommonsMenuItemFixtures.threeItems);
 
-    axiosMock.onDelete("/api/ucsbdiningcommonsmenuitem").reply((config) => {
+    axiosMock.onDelete("/api/ucsbdiningcommonmenuitem").reply((config) => {
       // Ensure the correct ID is being deleted
       expect(config.params).toEqual({ id: 2 });
       return [200, { message: "UCSBDiningCommonsMenuItem with id 2 deleted" }];
@@ -201,7 +201,7 @@ describe("UCSBDiningCommonsMenuItemIndexPage tests", () => {
   test("Does not render Create Button for regular user", async () => {
     const queryClient = new QueryClient();
     setupUserOnly();
-    axiosMock.onGet("/api/ucsbdiningcommonsmenuitem/all").reply(200, []);
+    axiosMock.onGet("/api/ucsbdiningcommonmenuitem/all").reply(200, []);
 
     render(
       <QueryClientProvider client={queryClient}>
