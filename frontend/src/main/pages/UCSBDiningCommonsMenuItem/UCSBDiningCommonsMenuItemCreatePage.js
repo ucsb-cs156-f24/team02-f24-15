@@ -8,7 +8,7 @@ export default function UCSBDiningCommonsMenuItemCreatePage({
   storybook = false,
 }) {
   const objectToAxiosParams = (item) => ({
-    url: "/api/ucsbdiningcommonmenuitem/post",
+    url: "/api/ucsbdiningcommonsmenuitem/post",
     method: "POST",
     params: {
       diningCommonsCode: item.diningCommonsCode,
@@ -26,7 +26,7 @@ export default function UCSBDiningCommonsMenuItemCreatePage({
   // Stryker disable next-line ArrayDeclaration
   const mutation = useBackendMutation(objectToAxiosParams, { onSuccess }, [
     // Stryker disable next-line StringLiteral
-    "/api/ucsbdiningcommonmenuitem/all",
+    "/api/ucsbdiningcommonsmenuitem/all",
   ]);
   // Stryker restore
 
@@ -37,7 +37,7 @@ export default function UCSBDiningCommonsMenuItemCreatePage({
   };
 
   if (isSuccess && !storybook) {
-    return <Navigate to="/diningcommonsmenuitem" />;
+    return <Navigate to="/ucsbdiningcommonsmenuitem" />;
   }
 
   return (

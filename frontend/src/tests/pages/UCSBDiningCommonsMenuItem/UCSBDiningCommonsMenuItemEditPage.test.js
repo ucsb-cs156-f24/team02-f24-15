@@ -49,7 +49,7 @@ describe("UCSBDiningCommonsMenuItemEditPage tests", () => {
         .onGet("/api/systemInfo")
         .reply(200, systemInfoFixtures.showingNeither);
       axiosMock
-        .onGet("/api/ucsbdiningcommonmenuitem", { params: { id: 3 } })
+        .onGet("/api/ucsbdiningcommonsmenuitem", { params: { id: 3 } })
         .timeout();
     });
 
@@ -85,14 +85,14 @@ describe("UCSBDiningCommonsMenuItemEditPage tests", () => {
         .onGet("/api/systemInfo")
         .reply(200, systemInfoFixtures.showingNeither);
       axiosMock
-        .onGet("/api/ucsbdiningcommonmenuitem", { params: { id: 3 } })
+        .onGet("/api/ucsbdiningcommonsmenuitem", { params: { id: 3 } })
         .reply(200, {
           id: 3,
           diningCommonsCode: "DCS",
           name: "Grilled Cheese",
           station: "Hot Station",
         });
-      axiosMock.onPut("/api/ucsbdiningcommonmenuitem").reply(200, {
+      axiosMock.onPut("/api/ucsbdiningcommonsmenuitem").reply(200, {
         id: 3,
         diningCommonsCode: "SCD",
         name: "Chilled Cheese",
@@ -148,7 +148,7 @@ describe("UCSBDiningCommonsMenuItemEditPage tests", () => {
         "DiningCommonsMenuItem Updated - id: 3 name: Chilled Cheese",
       );
 
-      expect(mockNavigate).toBeCalledWith({ to: "/diningcommonsmenuitem" });
+      expect(mockNavigate).toBeCalledWith({ to: "/ucsbdiningcommonsmenuitem" });
 
       expect(axiosMock.history.put.length).toBe(1);
       expect(axiosMock.history.put[0].params).toEqual({ id: 3 });
@@ -204,7 +204,7 @@ describe("UCSBDiningCommonsMenuItemEditPage tests", () => {
       expect(mockToast).toBeCalledWith(
         "DiningCommonsMenuItem Updated - id: 3 name: Chilled Cheese",
       );
-      expect(mockNavigate).toBeCalledWith({ to: "/diningcommonsmenuitem" });
+      expect(mockNavigate).toBeCalledWith({ to: "/ucsbdiningcommonsmenuitem" });
     });
   });
 });

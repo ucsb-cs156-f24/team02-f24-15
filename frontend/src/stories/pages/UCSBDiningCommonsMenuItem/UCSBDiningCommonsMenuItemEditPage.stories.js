@@ -26,7 +26,7 @@ Default.parameters = {
         status: 200,
       });
     }),
-    http.get("/api/ucsbdiningcommonmenuitem", () => {
+    http.get("/api/ucsbdiningcommonsmenuitem", () => {
       return HttpResponse.json(
         ucsbDiningCommonsMenuItemFixtures.threeItems[0],
         {
@@ -34,10 +34,10 @@ Default.parameters = {
         },
       );
     }),
-    http.put("/api/ucsbdiningcommonmenuitem", () => {
+    http.put("/api/ucsbdiningcommonsmenuitem", () => {
       return HttpResponse.json({}, { status: 200 });
     }),
-    http.put("/api/ucsbdiningcommonmenuitem", (req) => {
+    http.put("/api/ucsbdiningcommonsmenuitem", (req) => {
       window.alert("PUT: " + req.url + " and body: " + req.body);
       return HttpResponse.json({}, { status: 200 });
     }),
