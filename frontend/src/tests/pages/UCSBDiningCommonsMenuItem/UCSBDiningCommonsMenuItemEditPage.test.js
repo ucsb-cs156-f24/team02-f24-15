@@ -148,7 +148,7 @@ describe("UCSBDiningCommonsMenuItemEditPage tests", () => {
         "DiningCommonsMenuItem Updated - id: 3 name: Chilled Cheese",
       );
 
-      expect(mockNavigate).toBeCalledWith({ to: "/ucsbdiningcommonmenuitem" });
+      expect(mockNavigate).toBeCalledWith({ to: "/diningcommonsmenuitem" });
 
       expect(axiosMock.history.put.length).toBe(1);
       expect(axiosMock.history.put[0].params).toEqual({ id: 3 });
@@ -204,7 +204,7 @@ describe("UCSBDiningCommonsMenuItemEditPage tests", () => {
       expect(mockToast).toBeCalledWith(
         "DiningCommonsMenuItem Updated - id: 3 name: Chilled Cheese",
       );
-      expect(mockNavigate).toBeCalledWith({ to: "/ucsbdiningcommonmenuitem" });
+      expect(mockNavigate).toBeCalledWith({ to: "/diningcommonsmenuitem" });
     });
   });
 });
