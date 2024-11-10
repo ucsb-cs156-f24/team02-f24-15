@@ -7,26 +7,26 @@ import { toast } from "react-toastify";
 export default function UCSBDiningCommonsMenuItemCreatePage({
   storybook = false,
 }) {
-  const objectToAxiosParams = (item) => ({
-    url: "/api/ucsbdiningcommonmenuitem/post",
+  const objectToAxiosParams = (menuItems) => ({
+    url: "/api/ucsbdiningcommonsmenuitem/post",
     method: "POST",
     params: {
-      diningCommonsCode: item.diningCommonsCode,
-      name: item.name,
-      station: item.station,
+      diningCommonsCode: menuItems.diningCommonsCode,
+      name: menuItems.name,
+      station: menuItems.station,
     },
   });
 
-  const onSuccess = (item) => {
+  const onSuccess = (menuItems) => {
     toast(
-      `New UCSBDiningCommonsMenuItem Created - id: ${item.id} name: ${item.name}`,
+      `New UCSBDiningCommonsMenuItem Created - id: ${menuItems.id} name: ${menuItems.name}`,
     );
   };
 
   // Stryker disable next-line ArrayDeclaration
   const mutation = useBackendMutation(objectToAxiosParams, { onSuccess }, [
     // Stryker disable next-line StringLiteral
-    "/api/ucsbdiningcommonmenuitem/all",
+    "/api/ucsbdiningcommonsmenuitem/all",
   ]);
   // Stryker restore
 
@@ -37,13 +37,13 @@ export default function UCSBDiningCommonsMenuItemCreatePage({
   };
 
   if (isSuccess && !storybook) {
-    return <Navigate to="/diningcommonsmenuitem" />;
+    return <Navigate to="/ucsbdiningcommonsmenuitem" />;
   }
 
   return (
     <BasicLayout>
       <div className="pt-2">
-        <h1>Create New UCSB Dining Commons Menu Item</h1>
+        <h1>Create UCSBDiningCommonsMenuItems</h1>
         <UCSBDiningCommonsMenuItemForm submitAction={onSubmit} />
       </div>
     </BasicLayout>

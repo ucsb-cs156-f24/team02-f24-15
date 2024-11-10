@@ -27,7 +27,7 @@ import jakarta.validation.Valid;
  */
 
 @Tag(name = "UCSBDiningCommonsMenuItem")
-@RequestMapping("/api/ucsbdiningcommonmenuitem")
+@RequestMapping("/api/ucsbdiningcommonsmenuitem")
 @RestController
 @Slf4j
 public class UCSBDiningCommonsMenuItemController extends ApiController {

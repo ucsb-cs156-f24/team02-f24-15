@@ -11,39 +11,39 @@ export default function UCSBDiningCommonsMenuItemEditPage({
   let { id } = useParams();
 
   const {
-    data: diningcommonsmenuitem,
+    data: menuItems,
     _error,
     _status,
   } = useBackend(
     // Stryker disable next-line all : don't test internal caching of React Query
-    [`/api/ucsbdiningcommonmenuitem?id=${id}`],
+    [`/api/ucsbdiningcommonsmenuitem?id=${id}`],
     {
       // Stryker disable next-line all : GET is the default, so mutating this to "" doesn't introduce a bug
       method: "GET",
-      url: `/api/ucsbdiningcommonmenuitem`,
+      url: `/api/ucsbdiningcommonsmenuitem`,
       params: {
         id,
       },
     },
   );
 
-  const objectToAxiosPutParams = (diningcommonsmenuitem) => ({
-    url: "/api/ucsbdiningcommonmenuitem",
+  const objectToAxiosPutParams = (menuItems) => ({
+    url: "/api/ucsbdiningcommonsmenuitem",
     method: "PUT",
     params: {
-      id: diningcommonsmenuitem.id,
+      id: menuItems.id,
     },
     data: {
-      id: diningcommonsmenuitem.id,
-      diningCommonsCode: diningcommonsmenuitem.diningCommonsCode,
-      name: diningcommonsmenuitem.name,
-      station: diningcommonsmenuitem.station,
+      id: menuItems.id,
+      diningCommonsCode: menuItems.diningCommonsCode,
+      name: menuItems.name,
+      station: menuItems.station,
     },
   });
 
-  const onSuccess = (diningcommonsmenuitem) => {
+  const onSuccess = (menuItems) => {
     toast(
-      `DiningCommonsMenuItem Updated - id: ${diningcommonsmenuitem.id} name: ${diningcommonsmenuitem.name}`,
+      `DiningCommonsMenuItem Updated - id: ${menuItems.id} name: ${menuItems.name}`,
     );
   };
 
@@ -51,7 +51,7 @@ export default function UCSBDiningCommonsMenuItemEditPage({
     objectToAxiosPutParams,
     { onSuccess },
     // Stryker disable next-line all : hard to set up test for caching
-    [`/api/ucsbdiningcommonmenuitem?id=${id}`],
+    [`/api/ucsbdiningcommonsmenuitem?id=${id}`],
   );
 
   const { isSuccess } = mutation;
@@ -61,16 +61,16 @@ export default function UCSBDiningCommonsMenuItemEditPage({
   };
 
   if (isSuccess && !storybook) {
-    return <Navigate to="/diningcommonsmenuitem" />;
+    return <Navigate to="/ucsbdiningcommonsmenuitem" />;
   }
 
   return (
     <BasicLayout>
       <div className="pt-2">
         <h1>Edit DiningCommonsMenuItem</h1>
-        {diningcommonsmenuitem && (
+        {menuItems && (
           <UCSBDiningCommonsMenuItemForm
-            initialContents={diningcommonsmenuitem}
+            initialContents={menuItems}
             submitAction={onSubmit}
             buttonLabel={"Update"}
           />
