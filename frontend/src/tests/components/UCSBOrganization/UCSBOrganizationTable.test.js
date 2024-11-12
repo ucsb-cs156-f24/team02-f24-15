@@ -21,8 +21,14 @@ describe("UCSBOrganizationTable tests", () => {
     "Organization Code",
     "Organization Translation Short",
     "Organization Translation",
+    "Inactive",
   ];
-  const expectedFields = ["orgCode", "orgTranslationShort", "orgTranslation"];
+  const expectedFields = [
+    "orgCode",
+    "orgTranslationShort",
+    "orgTranslation",
+    "Inactive",
+  ];
   const testId = "UCSBOrganizationTable";
 
   test("renders empty table correctly", () => {
@@ -92,6 +98,9 @@ describe("UCSBOrganizationTable tests", () => {
     expect(
       screen.getByTestId(`${testId}-cell-row-1-col-orgTranslationShort`),
     ).toHaveTextContent("Delta Sigma Pi");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-1-col-Inactive`),
+    ).toHaveTextContent("false");
 
     const editButton = screen.getByTestId(
       `${testId}-cell-row-0-col-Edit-button`,

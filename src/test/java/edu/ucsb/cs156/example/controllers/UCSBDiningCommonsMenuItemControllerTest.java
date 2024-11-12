@@ -46,20 +46,20 @@ public class UCSBDiningCommonsMenuItemControllerTest extends ControllerTestCase 
 
     @Test
     public void logged_out_users_cannot_get_all() throws Exception {
-        mockMvc.perform(get("/api/ucsbdiningcommonmenuitem/all"))
+        mockMvc.perform(get("/api/ucsbdiningcommonsmenuitem/all"))
                 .andExpect(status().is(403)); // Forbidden for logged-out users
     }
 
     @WithMockUser(roles = { "USER" })
     @Test
     public void logged_in_users_can_get_all() throws Exception {
-        mockMvc.perform(get("/api/ucsbdiningcommonmenuitem/all"))
+        mockMvc.perform(get("/api/ucsbdiningcommonsmenuitem/all"))
                 .andExpect(status().isOk()); // Success for logged-in users
     }
 
     @Test
     public void logged_out_users_cannot_post() throws Exception {
-        mockMvc.perform(post("/api/ucsbdiningcommonmenuitem/post")
+        mockMvc.perform(post("/api/ucsbdiningcommonsmenuitem/post")
                         .param("diningCommonsCode", "test-code")
                         .param("name", "Test Item")
                         .param("station", "Test Station")
@@ -70,7 +70,7 @@ public class UCSBDiningCommonsMenuItemControllerTest extends ControllerTestCase 
     @WithMockUser(roles = { "USER" })
     @Test
     public void logged_in_regular_users_cannot_post() throws Exception {
-        mockMvc.perform(post("/api/ucsbdiningcommonmenuitem/post")
+        mockMvc.perform(post("/api/ucsbdiningcommonsmenuitem/post")
                         .param("diningCommonsCode", "test-code")
                         .param("name", "Test Item")
                         .param("station", "Test Station")
@@ -92,7 +92,7 @@ public class UCSBDiningCommonsMenuItemControllerTest extends ControllerTestCase 
 
         // Act
         MvcResult response = mockMvc.perform(
-                post("/api/ucsbdiningcommonmenuitem/post")
+                post("/api/ucsbdiningcommonsmenuitem/post")
                         .param("diningCommonsCode", "test-code")
                         .param("name", "Test Item")
                         .param("station", "Test Station")
@@ -141,7 +141,7 @@ public class UCSBDiningCommonsMenuItemControllerTest extends ControllerTestCase 
         when(ucsbDiningCommonsMenuItemRepository.findAll()).thenReturn(items);
 
         // Act
-        MvcResult response = mockMvc.perform(get("/api/ucsbdiningcommonmenuitem/all"))
+        MvcResult response = mockMvc.perform(get("/api/ucsbdiningcommonsmenuitem/all"))
                 .andExpect(status().isOk()).andReturn();
 
         // Assert
@@ -165,7 +165,7 @@ public class UCSBDiningCommonsMenuItemControllerTest extends ControllerTestCase 
         when(ucsbDiningCommonsMenuItemRepository.findById(1L)).thenReturn(Optional.of(item));
 
         // Act
-        MvcResult response = mockMvc.perform(get("/api/ucsbdiningcommonmenuitem")
+        MvcResult response = mockMvc.perform(get("/api/ucsbdiningcommonsmenuitem")
                         .param("id", "1"))
                 .andExpect(status().isOk())
                 .andReturn();
@@ -188,7 +188,7 @@ public class UCSBDiningCommonsMenuItemControllerTest extends ControllerTestCase 
         when(ucsbDiningCommonsMenuItemRepository.findById(99L)).thenReturn(Optional.empty());
 
         // Act
-        MvcResult response = mockMvc.perform(get("/api/ucsbdiningcommonmenuitem")
+        MvcResult response = mockMvc.perform(get("/api/ucsbdiningcommonsmenuitem")
                         .param("id", "99"))
                 .andExpect(status().isNotFound())
                 .andReturn();
@@ -226,7 +226,7 @@ public class UCSBDiningCommonsMenuItemControllerTest extends ControllerTestCase 
 
         // Act
         MvcResult response = mockMvc.perform(
-                put("/api/ucsbdiningcommonmenuitem")
+                put("/api/ucsbdiningcommonsmenuitem")
                         .param("id", "1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestBody)
@@ -273,7 +273,7 @@ public class UCSBDiningCommonsMenuItemControllerTest extends ControllerTestCase 
 
         // Act
         MvcResult response = mockMvc.perform(
-                put("/api/ucsbdiningcommonmenuitem")
+                put("/api/ucsbdiningcommonsmenuitem")
                         .param("id", id.toString())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestBody)
@@ -304,7 +304,7 @@ public class UCSBDiningCommonsMenuItemControllerTest extends ControllerTestCase 
 
         // Act
         mockMvc.perform(
-                put("/api/ucsbdiningcommonmenuitem")
+                put("/api/ucsbdiningcommonsmenuitem")
                         .param("id", "1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestBody)
@@ -327,7 +327,7 @@ public class UCSBDiningCommonsMenuItemControllerTest extends ControllerTestCase 
 
         // Act
         MvcResult response = mockMvc.perform(
-                delete("/api/ucsbdiningcommonmenuitem")
+                delete("/api/ucsbdiningcommonsmenuitem")
                         .param("id", "1")
                         .with(csrf()))
                 .andExpect(status().isOk())
@@ -349,7 +349,7 @@ public class UCSBDiningCommonsMenuItemControllerTest extends ControllerTestCase 
 
         // Act
         MvcResult response = mockMvc.perform(
-                delete("/api/ucsbdiningcommonmenuitem")
+                delete("/api/ucsbdiningcommonsmenuitem")
                         .param("id", "99")
                         .with(csrf()))
                 .andExpect(status().isNotFound())
@@ -368,7 +368,7 @@ public class UCSBDiningCommonsMenuItemControllerTest extends ControllerTestCase 
         public void regular_user_cannot_delete_menu_item() throws Exception {
         // Act
         mockMvc.perform(
-                delete("/api/ucsbdiningcommonmenuitem")
+                delete("/api/ucsbdiningcommonsmenuitem")
                         .param("id", "1")
                         .with(csrf()))
                 .andExpect(status().isForbidden()); // 403 Forbidden

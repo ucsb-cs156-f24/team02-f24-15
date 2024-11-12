@@ -48,10 +48,10 @@ export default function UCSBOrganizationTable({
       Header: "Organization Translation",
       accessor: "orgTranslation",
     },
-    /*{
-        Header: "Inactive",
-        accessor: "inactive",
-    },*/
+    {
+      Header: "Inactive",
+      accessor: (organizations) => organizations.inactive.toString(),
+    },
   ];
 
   if (hasRole(currentUser, "ROLE_ADMIN")) {
