@@ -39,10 +39,11 @@ public class RecommendationRequestWebIT extends WebTestCase {
 
         page.getByTestId("RecommendationRequestTable-cell-row-0-col-Edit-button").click();
         assertThat(page.getByText("Edit RecommendationRequest")).isVisible();
-        page.getByTestId("RecommendationRequestForm-explanation").fill("new expl");
+        page.getByTestId("RecommendationRequestForm-requesterEmail").fill("new@ucsb.edu");
+        page.getByTestId("RecommendationRequestForm-submit").click();
         page.getByTestId("RecommendationRequestForm-submit").click();
 
-        assertThat(page.getByTestId("RecommendationRequestTable-cell-row-0-col-explanation")).hasText("new expl");
+        assertThat(page.getByTestId("RecommendationRequestTable-cell-row-0-col-requesterEmail")).hasText("new@ucsb.edu");
 
 
         page.getByTestId("RecommendationRequestTable-cell-row-0-col-Delete-button").click();
