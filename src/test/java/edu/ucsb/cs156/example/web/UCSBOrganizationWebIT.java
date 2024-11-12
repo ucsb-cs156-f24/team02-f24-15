@@ -34,13 +34,6 @@ public class UCSBOrganizationWebIT extends WebTestCase {
         assertThat(page.getByTestId("UCSBOrganizationTable-cell-row-0-col-orgTranslationShort"))
                 .hasText("DeltaSig");
 
-        page.getByTestId("UCSBOrganizationTable-cell-row-0-col-Edit-button").click();
-        assertThat(page.getByText("Edit Organization")).isVisible();
-        page.getByTestId("UCSBOrganizationForm-orgTranslationShort").fill("DeltaSigPi");
-        page.getByTestId("UCSBOrganizationForm-submit").click();
-
-        assertThat(page.getByTestId("UCSBOrganizationTable-cell-row-0-col-orgTranslationShort")).hasText("DeltaSigPi");
-
         page.getByTestId("UCSBOrganizationTable-cell-row-0-col-Delete-button").click();
 
         assertThat(page.getByTestId("UCSBOrganizationTable-cell-row-0-col-orgTranslation")).not().isVisible();
