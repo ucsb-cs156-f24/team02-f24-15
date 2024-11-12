@@ -28,7 +28,7 @@ public class UCSBOrganizationWebIT extends WebTestCase {
         page.getByTestId("UCSBOrganizationForm-orgCode").fill("DSP");
         page.getByTestId("UCSBOrganizationForm-orgTranslationShort").fill("DeltaSig");
         page.getByTestId("UCSBOrganizationForm-orgTranslation").fill("Delta Sigma Pi");
-        page.getByTestId("UCSBOrganizationForm-Inactive").fill("true");
+        page.getByTestId("UCSBOrganizationForm-inactive").fill("true");
         page.getByTestId("UCSBOrganizationForm-submit").click();
 
         assertThat(page.getByTestId("UCSBOrganizationTable-cell-row-0-col-orgTranslationShort"))
