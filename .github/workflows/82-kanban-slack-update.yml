@@ -4,6 +4,8 @@ name: "82-kanban-slack-update.yml"
 # <https://ucsb-cs156.github.io/topics/github_actions/workflow_82.html>
 
 on:
+  schedule:
+    - cron: "0 17 * * *"  # Run at 9:00 AM PST / 5:00 PM UTC
   workflow_dispatch:  # Allows manual triggering
 
 env:
@@ -35,10 +37,10 @@ jobs:
             echo "Current date is before $end_date. Continuing workflow."
             echo "continue=true" >> "$GITHUB_OUTPUT"
           fi
-          REPO=${{ github.repository }}
-          PREFIX="${REPO: 7}"
-          echo "prefix=${PREFIX}" >> "$GITHUB_OUTPUT"
-          if [[ "$PREFIX" == "STARTER" ]]; then
+          OWNER_PLUS_REPOSITORY=${{github.repository}}
+          OWNER=${{ github.repository_owner }}
+          REPOSITORY=${OWNER_PLUS_REPOSITORY/$OWNER\//}
+          if [[ "$REPOSITORY" == STARTER* ]]; then
             echo "This workflow should not run on a starter repository"
             echo "continue=false" >> "$GITHUB_OUTPUT"
           fi
