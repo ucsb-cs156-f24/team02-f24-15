@@ -4,6 +4,8 @@ name: "82-kanban-slack-update.yml"
 # <https://ucsb-cs156.github.io/topics/github_actions/workflow_82.html>
 
 on:
+  schedule:
+    - cron: "0 17 * * *"  # Run at 9:00 AM PST / 5:00 PM UTC
   workflow_dispatch:  # Allows manual triggering
 
 env:
@@ -35,10 +37,10 @@ jobs:
             echo "Current date is before $end_date. Continuing workflow."
             echo "continue=true" >> "$GITHUB_OUTPUT"
           fi
-          REPO=${{ github.repository }}
-          PREFIX="${REPO: 7}"
-          echo "prefix=${PREFIX}" >> "$GITHUB_OUTPUT"
-          if [[ "$PREFIX" == "STARTER" ]]; then
+          OWNER_PLUS_REPOSITORY=${{github.repository}}
+          OWNER=${{ github.repository_owner }}
+          REPOSITORY=${OWNER_PLUS_REPOSITORY/$OWNER\//}
+          if [[ "$REPOSITORY" == STARTER* ]]; then
             echo "This workflow should not run on a starter repository"
             echo "continue=false" >> "$GITHUB_OUTPUT"
           fi
@@ -218,9 +220,6 @@ jobs:
               Write-Host "Processing column: $column"
               if ($null -ne $column) {
                 $assignees = $item.content.assignees.nodes | Select-Object -ExpandProperty login
-                if ($assignees.Count -eq 0) {
-                  $assignees = @("UNASSIGNED")
-                }
                 foreach ($assignee in $assignees) {
                   Write-Host "Processing assignee: $assignee"
                   if (-not $issueCounts.ContainsKey($column)) {
@@ -286,20 +285,14 @@ jobs:
           }
           $issueCounts = $issueCounts | ConvertFrom-Json
 
-          # Collect all assignees and track unassigned issues
-          $assignees = @{}
-          $unassignedCounts = @{}
+          # Collect all assignees
+          $assignees = @{ }
           foreach ($column in $issueCounts.PSObject.Properties.Name) {
-            $unassignedCounts[$column] = 0
             foreach ($assignee in $issueCounts.$column.PSObject.Properties.Name) {
-              if ($assignee -eq "UNASSIGNED") {
-                $unassignedCounts[$column] += $issueCounts.$column.$assignee
-              } else {
-                if (-not $assignees.ContainsKey($assignee)) {
-                  $assignees[$assignee] = @{}
-                }
-                $assignees[$assignee][$column] = $issueCounts.$column.$assignee
+              if (-not $assignees.ContainsKey($assignee)) {
+                $assignees[$assignee] = @{ }
               }
+              $assignees[$assignee][$column] = $issueCounts.$column.$assignee
             }
           }
 
@@ -307,7 +300,7 @@ jobs:
           $columns = $env:columns -split ", "
           $columnWidths = @(18, 3, 3, 3, 3)  # Fixed widths for each column
 
-          # Left align the text within each cell
+          # Left align the text within each cell with manual adjustments
           function LeftAlignText($text, $width) {
             $text = [string]$text  # Ensure $text is treated as a string
             $padding = " " * [math]::Max(0, $width - $text.Length)
@@ -319,7 +312,6 @@ jobs:
           foreach ($column in $columns) {
             $header += " " + $column.Substring(0, 4) + " |"
           }
-
 
           # Define the separator with exact dash counts for each column
           $separator = "|------------------|"
@@ -341,15 +333,6 @@ jobs:
             }
             $table += "$row`n"
           }
-
-          # Add the unassigned row
-          $unassignedRow = "| " + (LeftAlignText "UNASSIGNED" 17) + "|"
-          foreach ($column in $columns) {
-            $unassignedCount = $unassignedCounts[$column]
-            $leftAlignedUnassignedCount = printf "%4s" $unassignedCount
-            $unassignedRow += " $leftAlignedUnassignedCount |"
-          }
-          $table += "$unassignedRow`n"
 
           Write-Host "ASCII Table:`n$table"
           $table | Out-File ascii_table.txt
